@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Add</title>
+<script src="js/jQuery.min.js"></script>
+<script src="js/controller.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/myStyle.css">
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">AESPassManager</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="search.html">Search</a></li>
+        <li class="active"><a href="add.html">Add</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div id="authenticate" display="block">
+  <div id="option">
+    <h3>Add a Password to your Vault</h3>
+    <form name="test" class="form-inline"><br>
+      <div class="form-group">
+        <label>Url to Add: </label>
+        <input type="text" class="form-control" name="urladd" placeholder="example.com">
+      </div><br>
+      <div class="form-group">
+        <label>Password: </label>
+        <input type="password" class="form-control" name="pwdadd" placeholder="Password">
+      </div><br><br>
+      <input type="button" id="add" class="btn btn-primary" value="Search">
+      <input type="reset" id="cancel1" class="btn btn-default" value="Cancel"/>
+    </form>
+  </div>
+</div>
+<div id="reveal"></div>
+<div id="password"></div>
+</body>
+</html>

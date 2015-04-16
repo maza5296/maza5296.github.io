@@ -1,44 +1,48 @@
 <html>
 <head>
 <title>Login page</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="js/authenticate.js"></script>
+<script src="js/jQuery.min.js"></script>
+<script src="js/controller.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/myStyle.css">
 </head>
 <body>
+
+<!-- navbar -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">AESPassManager</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="search.html">Search</a></li>
+        <li><a href="add.html">Add</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
 <div id="authenticate" display="block">
-  <h3>
-  Authenticate to Access Vault
-  </h3>
-  <form name="login" class="form-inline">
-  <div class="form-group">
-    <label>Username: </label>
-    <input type="text" class="form-control" name="userid" placeholder="Username">
-  </div>
-  <br>
-  <div class="form-group">
-    <label>Password: </label>
-    <input type="password" class="form-control" name="pswrd" placeholder="Password">
-  </div>
-  <br><br>
-  <input type="button" class="btn btn-primary" onclick="verify(this.form)" value="Login"/>
-  <input type="reset" class="btn btn-default" value="Cancel"/>
-  </form>
   <div id="option">
-    <h3>OR</h3><br>
-    <h3>Search your website here</h3>
-    <form name="test" class="form-inline">
-      <div class="form-group">
-        <label>CheckSite: </label>
-        <input type="text" class="form-control" name="urlcheck" placeholder="Url">
-      </div><br>
-      <div class="form-group">
-        <label>Password: </label>
-        <input type="password" class="form-control" name="pwdcheck" placeholder="Password">
-      </div><br><br>
-      <input type="button" onclick="check(this.form)" class="btn btn-primary" value="Check">
-      <input type="reset" class="btn btn-default" value="Cancel"/>
+    <h3>Access this Page</h3>
+    <form name="login" class="form-inline">
+
+  <!-- For now, we will assume single user usage -->
+  <!--  <div class="form-group">
+      <label>Username: </label>
+      <input type="text" class="form-control" name="userid" id="userid" placeholder="Username">
+    </div> -->
+    <br>
+    <div class="form-group">
+      <label>Password: </label>
+      <input type="password" class="form-control" name="pswrd" placeholder="Password">
+    </div>
+    <br><br>
+    <input type="button" id="login" class="btn btn-primary" value="Login"/>
+    <input type="reset" id="cancel1" class="btn btn-default" value="Cancel"/>
     </form>
   </div>
 </div>

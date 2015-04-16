@@ -7,7 +7,7 @@
 
   "browser_action": {
     "default_icon": "img/icon.jpg",
-    "default_popup": "view.html",
+    "default_popup": "index.html",
     "default_title": "AES Password Manager"
   },
   "permissions": [
