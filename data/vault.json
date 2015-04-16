@@ -1,0 +1,18 @@
+[
+  {
+    "url":"facebook.com",
+    "password": "Ae$enCRypt0r!"
+  },
+  {
+    "url":"google.com",
+    "password":"password2"
+  },
+  {
+    "url":"youtube.com",
+    "password":"password3"
+  },
+  {
+    "url":"gmail.com",
+    "password":"password4"
+  }
+]
