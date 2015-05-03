@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>D3 Test</title>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<style>
+.bar {
+	fill: steelblue;
+}
+.bar:hover {
+	fill: black;
+}
+</style>
+</head>
+
+<body>
+	<h1>CS171 Tryout Test</h1>
+	<script type="text/javascript">
+	
+	var data = [150, 230, 180, 90];
+
+	var svg = d3.select("body")
+				.append("svg")
+				.attr("width", 300)
+				.attr("height", 200);
+
+	var bars = svg.selectAll(".bar");
+
+	var bars_enter = bars.data(data).enter();
+
+	var rects = bars_enter.append("rect")
+  		.attr({
+    		class : "bar",
+    		width : function(d) {return d;},
+    		height: "40",
+    		y : function(d, i) {return i*50 + 10;},
+    		x : "10"
+   		});
+
+	</script>
+</body>
+</html>

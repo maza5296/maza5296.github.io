@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+  <body>
+    <link rel="stylesheet" type="text/css" href="css/table.css">
+    <script src="d3.v3.min.js"></script>
+    <script>
+
+    var downloaded_data
+    var filtered_data
+    var aggregated_data
+    var nested_data
+
+    d3.json("data/countries_2012.json", function(error, data){
+
+		downloaded_data=data; 
+        
+        for(var i = 0; i < data.length; i++) {
+          delete data[i]['latitude'];
+          delete data[i]['longitude']; 
+          delete data[i]['alpha2_code']
+        }
+
+//        refined_data = Array.prototype.slice.call(dataset);
+        render (data);
+    });
+
+    function render (dataset) {
+		var columns = ["name","continent","gdp","life_expectancy","population","year"];
+		var sorted=""
+        console.log(dataset);
+
+        d3.select("body").selectAll("table").remove();
+
+        var table = d3.select("body").append("table"),
+          thead = table.append("thead")
+                       .attr("class", "thead");
+          tbody = table.append("tbody");
+
+        table.append("caption")
+          .html("World Countries Ranking");
+
+        thead.append("tr").selectAll("th")
+          .data(columns)
+        .enter()
+          .append("th")
+          .text(function(d) { return d; })
+          .on("click", function(header, i) {
+        	if (sorted == "descend"){
+        		sorted = "ascend"
+        		if (header=="continent"){
+        			tbody.selectAll("tr").sort(function(a, b) {
+        				return d3.descending(a[header] + a["name"], b[header] + b["name"])
+        			});
+        		}
+        		else{
+        			tbody.selectAll("tr").sort(function(a, b) {
+        			return d3.descending(a[header], b[header]);
+        			});
+    			}
+        		console.log(sorted);
+    		}
+        	else {
+        		sorted = "descend"
+        		if (header=="continent"){
+        			tbody.selectAll("tr").sort(function(a, b) {
+        				return d3.ascending(a[header] + a["name"], b[header] + b["name"])
+        			});
+        		}
+        		else{
+        			tbody.selectAll("tr").sort(function(a, b) {
+        			return d3.ascending(a[header], b[header]);
+        			});
+    			}
+            	console.log(sorted);
+            }
+          });
+
+        var rows = tbody.selectAll("tr.row")
+          .data(dataset)
+          .enter()
+          .append("tr").attr("class", "row");
+
+        var cells = rows.selectAll("td")
+          .data(function(row) {
+              return d3.range(columns.length).map(function(column, i) {
+	            if (columns[i] == "population"){
+          			return d3.format(",f")(row[columns[i]]);
+               	}
+               	else if (columns[i] == "gdp"){
+               		return d3.format(".1s")(row[columns[i]]);
+               	}
+               	else if (columns[i]=="life_expectancy")  {
+                    return d3.format("10.1f")(row[columns[i]]);
+                }
+                else
+                  return row[columns[i]];
+              });
+          })
+          .enter()
+          .append("td")
+          .text(function(d) { return d; })
+    }
+
+    function filter_cont () {
+      var cont_selection = [];
+
+      d3.selectAll("input").each(function(d) {  
+          if(d3.select(this).node().checked && d3.select(this).attr("type") == "checkbox") {
+              // Current name of the checkbox is d3.select(this).attr("name")
+              cont_selection.push(d3.select(this).attr("name"));
+              console.log(cont_selection);
+          }
+        });
+
+    	filtered_data = downloaded_data.filter(function(d) {
+          if (cont_selection.length == 0)
+            return d.continent;
+          else
+            return (d.continent == cont_selection[0]
+              || d.continent == cont_selection[1] 
+              || d.continent == cont_selection[2] 
+              || d.continent == cont_selection[3] 
+              || d.continent == cont_selection[4]); 
+      });
+
+      console.log("filtered!");
+      render (filtered_data);
+	  }
+
+    function aggregate () {
+      d3.selectAll("input").each(function(d) {  
+          if(d3.select(this).node().checked && d3.select(this).attr("type") == "radio") {
+            if(d3.select(this).attr("value") == "false") {
+              console.log("No aggregation");
+              render (downloaded_data);
+            }
+            else {
+
+              nested_data = d3.nest()
+                .key(function(d) {return d.continent;})
+                .key(function(d){return d.year})
+                .rollup(function(leaves) { 
+                  return {
+                    "gdp": d3.sum(leaves, function(d){return d.gdp;}),
+                    "life_expectancy": d3.mean(leaves,function(d){return d.life_expectancy}),
+                    "population": d3.mean(leaves, function(d){return d.population;})
+                  }
+                })
+                .entries(downloaded_data);
+
+                aggregated_data = nested_data.map(function(d){
+                  return {
+                    name:d.key,continent:d.key,
+                    year:d.values[0].key,
+                    gdp:d.values[0].values.gdp,
+                    life_expectancy:d.values[0].values.life_expectancy,
+                    population:d.values[0].values.population
+                  }
+                })
+                render(aggregated_data);
+
+                console.log(nested_data[0]["values"]);
+              console.log("Aggregate!");
+              console.log(aggregated_data);
+            }
+          }
+      });
+    }
+
+
+    </script> 
+    <p>
+      <label>Filter by:
+      <input type="checkbox" name="Americas" value="Americas" title="Americas" onchange="filter_cont()"></input>Americas
+      </label>
+      <label>
+      <input type="checkbox" name="Africa" value="Africa" title="Africa" onchange="filter_cont()"></input>Africa
+      </label>
+      <label>
+      <input type="checkbox" name="Asia" value="Asia" title="Asia" onchange="filter_cont()"></input>Asia
+      </label>
+      <label>
+      <input type="checkbox" name="Europe" value="Europe" title="Europe" onchange="filter_cont()"></input>Europe
+      </label>
+      <label>
+      <input type="checkbox" name="Oceania" value="Oceania" title="Oceania" onchange="filter_cont()"></input>Oceania
+      </label></br>
+      <label>Aggregation: <input type="radio" name="aggregation" value="false" onchange="aggregate()">None
+      <input type="radio" name="aggregation" value="true" onchange="aggregate()">by Continent</label>
+    </p>
+  </body>
+</html>

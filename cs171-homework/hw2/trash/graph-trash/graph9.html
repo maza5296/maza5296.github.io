@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Homework 2 Graph</title>
+<link rel="stylesheet" type="text/css" href="css/graph.css">
+<body>
+  Layout:
+  <label><input type="radio" name="layout" value="none" onclick="line_sort()" checked> None</label>
+  <label><input type="radio" name="layout" value="gdp" onclick="line_sort()"> GDP</label>
+  <label><input type="radio" name="layout" value="population" onclick="line_sort()"> Population</label><br>
+  Scatter:
+  <label><input type="radio" name="scatter" value="no-scatter" onclick="scatter()" checked> None</label>
+  <label><input type="radio" name="scatter" value="gdp-pop" onclick="scatter()"> GDP and Population</label>
+  <label><input type="radio" name="scatter" value="lon-lat" onclick="scatter()"> Latitude and Longitude</label><br>
+  Circular:
+  <label><input type="radio" name="circular" value="Yes" onclick="line_sort()" checked> No</label>
+  <label><input type="radio" name="circular" value="Yes" onclick="circular()"> Yes</label><br>
+  <select>
+    <option value="gdp">List</option>
+    <option value="gdp">GDP</option>
+    <option value="population" selected>Population</option>
+  </select><br>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var margin = {top: 50, bottom: 10, left: 300, right: 40};
+var width = 900 - margin.left - margin.right;
+var height = 900 - margin.top - margin.bottom;
+var radius = 5
+var dataset
+var node
+var rows
+var yScale = d3.scale.linear().range([0, height]);
+var xScale = d3.scale.linear().range([0, width]);
+ 
+var svg = d3.select("body").append("svg")
+            .attr("width", width+margin.left+margin.right)
+            .attr("height", height+margin.top+margin.bottom);
+
+
+ 
+d3.json("data/countries_2012.json", function(data) {
+
+  dataset = data;
+  var node = svg.selectAll(".node")
+            .data(dataset)
+            .enter()
+            .append("g")
+            .attr("class", "node");
+
+  node.append("circle")
+    .attr("r", radius)
+
+  node.append("text")
+    .attr("class", "country")
+    .text(function(d){
+      return d.name;});
+
+    line_sort();
+});
+
+function circular(){
+  var r = height/2;
+
+  var arc = d3.svg.arc()
+          .outerRadius(r);
+
+  var pie = d3.layout.pie()
+          .value(function(d, i) { 
+            return 1;  // We want an equal pie share/slice for each point
+          });
+
+  dataset = pie(dataset).map(function(d, i) {
+    // Needed to caclulate the centroid
+    d.innerRadius = 0;
+    d.outerRadius = r;
+
+    // Building the data object we are going to return
+    d.data.x = arc.centroid(d)[0]+width/2+margin.right;
+    d.data.y = arc.centroid(d)[1]+height/2;
+
+    return d.data;
+  })
+
+  graph_update(500);
+}
+
+function line_sort(){
+  console.log("yep");
+  var min = 0;
+  d3.selectAll("input").each(function(d) {  
+    if(d3.select(this).node().checked && d3.select(this).attr("value") == "gdp") {
+      var max = d3.max(dataset, function(d) { return d.gdp; } );
+      yScale.domain([min, max]);
+      dataset.forEach(function(d, i){
+        d.x = width / 2;
+        d.y = height - yScale(d.gdp) + radius * 2; 
+      });
+    }
+    else if(d3.select(this).node().checked && d3.select(this).attr("value") == "population") {
+      var max = d3.max(dataset, function(d) { return d.population; } );
+      yScale.domain([min, max]);
+      dataset.forEach(function(d, i){
+        d.x = width / 2;
+        d.y = height - yScale(d.population) + radius * 2; 
+      });
+    }
+    else if(d3.select(this).node().checked && d3.select(this).attr("value") == "none") {
+      dataset.forEach(function(d, i){
+        d.x = width / 2;
+        d.y = (height/dataset.length) * i + 15; 
+      });
+    }
+ });
+  graph_update(500);
+}
+
+function scatter(){
+
+  d3.selectAll("input").each(function(d) {  
+    if(d3.select(this).node().checked && d3.select(this).attr("value") == "lon-lat") {
+      var xmax = d3.max(dataset, function(d) { return d.longitude; } );
+      var xmin = d3.min(dataset, function(d) { return d.longitude; } );
+      var ymax = d3.max(dataset, function(d) { return d.latitude; } );
+      var ymin = d3.min(dataset, function(d) { return d.latitude; } );
+      xScale.domain([xmin, xmax]);
+      yScale.domain([ymin, ymax]);
+      dataset.forEach(function(d, i){
+        d.x = margin.right + xScale(d.longitude);
+        d.y = height - yScale(d.latitude) + radius * 2; 
+      }); 
+      graph_update(500);
+    }
+    else if(d3.select(this).node().checked && d3.select(this).attr("value") == "gdp-pop") {
+      var xmax = d3.max(dataset, function(d) { return d.population; } );
+      var xmin = d3.min(dataset, function(d) { return d.population; } );
+      var ymax = d3.max(dataset, function(d) { return d.gdp; } );
+      var ymin = d3.min(dataset, function(d) { return d.gdp; } );
+      xScale.domain([xmin, xmax]);
+      yScale.domain([ymin, ymax]);
+      dataset.forEach(function(d, i){
+        d.x = margin.right + xScale(d.population);
+        d.y = height - yScale(d.gdp) + radius * 2; 
+      });
+      graph_update(500);
+    }
+    else if(d3.select(this).node().checked && d3.select(this).attr("value") == "no-scatter") {
+      line_sort();
+    }
+  });
+}
+
+function graph_update(duration) {
+    d3.selectAll("circle").transition()
+        .duration(duration)
+        .attr("cx", function(d){
+          return d.x;})
+        .attr("cy", function(d){
+          return d.y;})
+
+    d3.selectAll("text").transition()
+        .duration(duration)
+        .attr("x", function(d){
+          return d.x + 20;})
+        .attr("y", function(d){
+          return d.y + 5;})
+      
+      console.log(dataset);
+}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+body {
+  font-family: helvetica;
+}
+
+.link {
+  stroke: #bbb;
+  stroke-width: .4px;
+}
+
+.text {
+  font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  fill: black;
+}
+
+.node {
+  fill: white;
+  stroke: black;
+  stroke-width: .8px;
+}

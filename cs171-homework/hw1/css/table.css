@@ -1,0 +1,33 @@
+body{
+	font-family: century gothic;
+}
+
+table{
+	text-align: right;
+	border-collapse:collapse;
+	margin: 0 auto;
+}
+th {
+	text-align: center;
+}
+tr:nth-child(even) {
+	background: #ddd
+}
+tr:nth-child(odd) {
+	background: #FFF
+}
+tr:hover {
+	background: yellow;
+}
+td{
+	padding: 0px 10px 0px 0px;
+}
+td:nth-child(1) {
+        text-align: left;
+    }
+td:nth-child(2) {
+        text-align: left
+    }
+p{
+	text-align: center;
+}

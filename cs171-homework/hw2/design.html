@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+circle {
+  fill: black;
+  fill-opacity: .2;
+}
+
+.leaf circle {
+  fill-opacity: .8;
+  stroke: none;
+}
+
+text {
+  font: 10px sans-serif;
+}
+
+</style>
+<body>
+<link rel=stylesheet href="css/clrs.css">
+<script src="../js/d3.v3.min.js"></script>
+<script>
+
+var root = [];
+var dataset
+var all_year_data = [];
+var all_year_trade =[];
+var links = [];
+var links_id = [];
+var color = d3.scale.category20b()
+
+var diameter = 960,
+    format = d3.format(",d");
+
+var pack = d3.layout.pack()
+    .size([diameter - 4, diameter - 4])
+    .value(function(d) { return d.size; });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", diameter)
+    .attr("height", diameter)
+  .append("g")
+    .attr("transform", "translate(2,2)");
+
+
+d3.json("data/countries_1995_2012.json", function(data) {
+  downloaded_data = data; 
+  downloaded_data.map(function(d,i){
+    for (i = 0; i < d.years.length; i++) {
+      var each = {
+        name: d.name,
+        continent: d.continent,
+        country_id: d.country_id,
+        gdp: d.years[i].gdp,
+        population: d.years[i].population,
+        total_export: d.years[i].total_export_value,
+        year: d.years[i].year,
+        latitude: d.latitude,
+        longitude: d.longitude,
+      };  
+      all_year_data.push(each);
+      var every = {
+        source: d.country_id,
+        target: d.years[i].top_partners,
+        year: d.years[i].year,
+      }
+      all_year_trade.push(every);
+    }
+  });
+  year_selection(2012);
+});
+
+function year_selection (year) {
+  var newYear = year;
+  dataset = all_year_data.filter(function(d){
+    return d.year == newYear;
+  });
+  
+  nested_links = all_year_trade.filter(function(d){
+    return d.year == newYear;
+  })
+  
+  nested_links.map(function(d){
+    for(i = 0; i < d.target.length; i++) {
+      var each = {
+        source: d.source,
+        target: d.target[i].country_id,
+        export_value: d.target[i].total_export,
+      }
+      if(typeof(each.source != "undefined" && each.target != "undefined")) {
+        links_id.push(each);
+      }
+    }
+  });
+
+  links_id.forEach(function(e) {
+    var sourceNode = dataset.filter(function(n) {
+        return e.source === n.country_id;
+    })[0],
+        targetNode = dataset.filter(function(n) {
+            return e.target === n.country_id;
+        })[0];
+
+    if(typeof targetNode != "undefined") {
+      links.push({
+          source: sourceNode,
+          target: targetNode,
+          export_value: e.export_value,
+      });
+    }
+  });
+  console.log(links);
+  arrange_data();
+}
+
+function arrange_data(){
+  var nested_root = d3.nest()
+                .key(function(d) {return d.continent;}) 
+                .entries(dataset);
+
+  console.log(nested_root);
+
+  var tmp_africa = [];
+  var tmp_europe = [];
+  var tmp_asia = [];
+  var tmp_america = [];
+  var tmp_oceania = [];
+
+  nested_root.map(function(d,i){
+    for (i = 0; i < d.values.length; i++)
+      if(d.key == "Africa"){
+        var each = {
+          country_id: d.values[i].country_id,
+          name: d.values[i].name,
+          size: d.values[i].gdp,
+          total_export: d.values[i].total_export,
+        }
+        tmp_africa.push(each);
+      }
+      else if(d.key == "Asia"){
+        var each = {
+          country_id: d.values[i].country_id,
+          name: d.values[i].name,
+          size: d.values[i].gdp,
+          total_export: d.values[i].total_export,
+        }
+        tmp_asia.push(each);
+      }
+      else if(d.key == "Europe"){
+        var each = {
+          country_id: d.values[i].country_id,
+          name: d.values[i].name,
+          size: d.values[i].gdp,
+          total_export: d.values[i].total_export,
+        }
+        tmp_europe.push(each);
+      }
+      else if(d.key == "Americas"){
+        var each = {
+          country_id: d.values[i].country_id,
+          name: d.values[i].name,
+          size: d.values[i].gdp,
+          total_export: d.values[i].total_export,
+        }
+        tmp_america.push(each);
+      }
+      else if(d.key == "Oceania"){
+        var each = {
+          country_id: d.values[i].country_id,
+          name: d.values[i].name,
+          size: d.values[i].gdp,
+          total_export: d.values[i].total_export,
+        }
+        tmp_oceania.push(each);
+      }
+  });
+
+  root = {"name": "globe",
+              "children" : [
+              {"name": "Asia",
+              "children": tmp_asia}, 
+              {"name": "Europe",
+              "children": tmp_europe},
+              {"name": "Africa",
+              "children": tmp_africa},
+              {"name": "Americas",
+               "children": tmp_america},
+               {"name": "Oceania",
+               "children": tmp_oceania},]}
+  render();
+}
+
+function render(){
+  var node = svg.datum(root).selectAll(".node")
+      .data(pack.nodes)
+    .enter().append("g")
+      .attr("class", function(d) { return d.children ? "node" : "leaf node"; })
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+    console.log(root);
+  node.append("title")
+      .text(function(d) { return d.name + (d.children ? "" : "\nGDP: " + format(d.size))});
+
+  node.append("circle")
+      .attr("opacity", 0)
+      .style("fill", function(d){if (d.depth > 1)return color(d.name)})
+      .on("click", function(d){
+        if (d.depth > 1 ){
+          mouseovered(d);}
+        })
+      .on("mouseout", function(d){
+        if (d.depth > 1 ){
+          mouseouted(d);}
+        })
+      .transition().duration(500)
+      .attr("opacity", 0.8)
+      .attr("r", function(d) { return d.r; });
+
+  node.filter(function(d) { return !d.children; }).append("text")
+      .attr("dy", ".3em")
+      .style("text-anchor", "middle")
+      .text(function(d) { return d.name.substring(0, d.r / 3); });
+
+      console.log(root);
+      console.log(links);
+
+}
+
+function mouseovered(d){
+  var partners = [];
+  console.log(d);
+  console.log("mouse!");
+  links.forEach(function(e){
+    if (e.source.name == d.name){
+      var each = {
+        target: [e.target, e.export_value]
+      }
+      partners.push(each)
+    }
+  });
+  var acc_export = 0;
+  partners.forEach(function(e){    
+    acc_export = acc_export + e.target[1]
+  })
+  console.log(d.total_export);
+  console.log(acc_export);
+  console.log(d3.max(partners, function(d) { return d.target[1]; } ))
+  
+  var rmax = acc_export;
+  var rmin = d3.min(partners, function(d) { return d.target[1]; } );
+
+  var rScale = d3.scale.linear().range([0, (d.r) * (d.r)]);
+  rScale.domain([0, rmax]);
+
+  d3.selectAll("circle")
+    .style("fill", function(e){ 
+                      if (partners.map(function(f) {return f.target[0].name; }).indexOf(e.name) != -1) {  
+                        return "teal"}
+                      else if (e.name == d.name) {
+                        return "red"}
+                      else return "grey"})
+    .transition().duration(500)
+    .filter(function(d) { return !d.children; })
+    .style("opacity", function(e){ 
+                    if (partners.map(function(f) {return f.target[0].name; }).indexOf(e.name) == -1 && e.name != d.name) {  
+                      return 0}})
+    .attr("r", function(e){ 
+                    var radius
+                    partners.map(function(f){
+                      if (f.target[0].name == e.name){
+                        radius = Math.sqrt(rScale(f.target[1]));
+                      }
+                    });
+                    if (radius != null){ 
+                      return radius;
+                    }
+                    else if(e.name == d.name){
+                      return Math.sqrt(rScale(acc_export));
+                    }
+                    else 
+                      return 0;
+    })
+
+    d3.selectAll("text")
+      .attr( "display", function(e){
+        if (partners.map(function(f) {return f.target[0].name; }).indexOf(e.name) == -1 && d.name != e.name) { 
+          return "none";
+        }})                    
+                      // if (partners.map(function(f) {return f.target.name; }).indexOf(e.name) != -1) { 
+                      //   return rScale(partners.map)}
+                      // else if (e.name == d.name) {
+                      //   return 200}
+                      // else return 0})
+}
+
+function mouseouted(d){
+   
+   d3.selectAll("circle")
+    .attr("r", function(d) { return d.r; })
+    .style("fill", function(l){ if (l.depth > 1) return color(l.name)})
+    .style("opacity", 0.8);
+
+  d3.selectAll("text")
+    .attr("display", true);
+}
+
+
+d3.select(self.frameElement).style("height", diameter + "px");
+
+</script>

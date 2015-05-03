@@ -1,0 +1,18 @@
+"vault": [
+  {
+    "url":"facebook.com",
+    "password": "password_for_facebook"
+  },
+  {
+    "url":"google.com",
+    "password":"password_for_google"
+  },
+  {
+    "url":"youtube.com",
+    "password":"password_for_youtube"
+  },
+  {
+    "url":"gmail.com",
+    "password":"password_for_gmail"
+  }
+]

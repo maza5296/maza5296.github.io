@@ -1,0 +1,23 @@
+body {
+	font-family: helvetica;
+	text-align: center;
+	width: 500px;
+	height: 500px !important;
+}
+#authenticate{
+	margin-top: 30px;
+}
+
+#reveal {
+	margin-top: 200px;
+	font-size: 20px;
+}
+
+#option {
+	margin-top: 50px;
+}
+
+#error {
+	margin-top: 270px;
+	margin-bottom: 330px;
+}

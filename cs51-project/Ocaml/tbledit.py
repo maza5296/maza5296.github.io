@@ -1,0 +1,5 @@
+f=open('table','r+')
+t=f.read()
+t=t.replace(' ', '')   
+f.write(t)
+f.close()

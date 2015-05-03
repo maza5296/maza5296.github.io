@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Homework 2 Graph</title>
+<style>
+  .link {
+    stroke: gray;
+    stroke-width: .8px;
+  }
+
+  .node {
+    fill: white;
+    stroke: #000;
+    stroke-width: .9px;
+  }
+
+  .node:hover {
+    fill: black;
+  }
+
+</style>
+<body>
+Layout:
+    <label><input type="radio" name="layout" value="force" onclick="line_regular()" checked> Regular</label>
+    <label><input type="radio" name="layout" value="force"> GDP</label><br>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var margin = {top: 50, bottom: 10, left: 300, right: 40};
+var width = 900 - margin.left - margin.right;
+var height = 900 - margin.top - margin.bottom;
+
+var dataset
+var node
+var rows
+ 
+var svg = d3.select("body").append("svg")
+            .attr("width", width+margin.left+margin.right)
+            .attr("height", height+margin.top+margin.bottom);
+
+
+ 
+d3.json("data/countries_2012.json", function(data) {
+
+  dataset = data;
+  var node = svg.selectAll(".node")
+            .data(dataset)
+            .enter()
+            .append("g")
+            .attr("class", "node");
+
+  node.append("circle")
+    .attr("r", 5)
+    // .attr("cx", 100)
+    // .attr("cy", function(d, i){
+    //   return i * 10 + 10; })
+});
+
+function line_regular(){
+  console.log("yes");
+  dataset.forEach(function(d, i){
+    d.x = width / 2;
+    d.y = 10 * i; 
+  });
+  graph_update(500);
+}
+
+function graph_update(duration) {
+    d3.selectAll("circle").transition()
+        .duration(duration)
+        .attr("transform", function(d) { 
+          return "translate("+d.x+","+d.y+")"; 
+      });
+
+      console.log(dataset);
+}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Homework 2 Graph</title>
+<style>
+  .link {
+    stroke: gray;
+    stroke-width: .8px;
+  }
+
+  .node {
+    fill: white;
+    stroke: #000;
+    stroke-width: .9px;
+  }
+
+  .node:hover {
+    fill: black;
+  }
+
+</style>
+<body>
+Layout:
+    <label><input type="radio" name="layout" value="force" onclick="line_regular()" checked> Regular</label>
+    <label><input type="radio" name="layout" value="force"> GDP</label><br>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var margin = {top: 50, bottom: 10, left: 300, right: 40};
+var width = 900 - margin.left - margin.right;
+var height = 900 - margin.top - margin.bottom;
+
+var dataset
+var node
+var rows
+
+var nb_nodes = 120, nb_cat = 10;
+
+var node_scale = d3.scale.linear().domain([0, nb_cat]).range([5, 50])
+
+var xScale = d3.scale.linear().range([0, width]);
+    var yScale = d3.scale.ordinal().rangeRoundBands([0, height], .8, 0);
+ 
+    var svg = d3.select("body").append("svg")
+                .attr("width", width+margin.left+margin.right)
+                .attr("height", height+margin.top+margin.bottom);
+ 
+    var g = svg.append("g")
+                .attr("transform", "translate("+margin.left+","+margin.top+")");
+ 
+    d3.json("data/countries_2012.json", function(data) {
+
+    dataset = data;
+
+        var max = d3.max(data, function(d) { return d.population; } );
+        var min = 0;
+        xScale.domain([min, max]);
+        yScale.domain(data.map(function(d) { return d.name; }));
+ 
+        var rows = g.append("g")
+                    .selectAll("g.row")
+                    .data(data)
+                  .enter()
+                    .append("g")
+                    .attr("class", "row")
+ 
+        var bars = rows
+                    .append("circle")
+                    .attr("r", 5)
+                    .attr("cx", xScale(min))
+                    .attr("cy", function(d) { return yScale(d.name); })
+    });
+
+function line_regular(){
+  console.log("yes");
+  dataset.forEach(function(d, i){
+    d.x = width / 2;
+    d.y = 10 * i; 
+  });
+  console.log(dataset);
+  graph_update(500);
+}
+
+function graph_update(duration) {
+
+        var max = d3.max(dataset, function(d) { return d.population; } );
+        var min = 0;
+        xScale.domain([min, max]);
+        yScale.domain(dataset.map(function(d) { return d.name; }));
+ 
+        var rows = g.append("g")
+                    .selectAll("g.row")
+                    .data(dataset)
+                  .enter()
+                    .append("g")
+                    .attr("class", "row")
+ 
+        var bars = rows
+                    .append("circle")
+                    .attr("r", 5)
+                    .attr("cx", function(d) { return d.x;})
+                    .attr("cy", function(d) { return d.y; })
+}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!--
+  Built by Angela Li
+-->
+
+<!doctype html>
+<html>
+    <head>
+      <meta charset="utf-8">
+
+      <title>Class of 2014, By The Numbers</title>
+
+      <link href="css/main.css" rel="stylesheet" type="text/css">
+
+      <script src="lib/jquery.js" type="text/javascript"></script>
+      <script src="lib/highcharts.js" type="text/javascript"></script>
+      <script src="js/main.js" type="text/javascript"></script>
+      <script src="lib/waypoints.js" type="text/javascript"></script>
+
+      <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                  ga('create', 'UA-327124-1', 'thecrimson.com');
+                  ga('send', 'pageview');
+      </script>
+      <script src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=thecrimson" type="text/javascript"></script>
+      <script>
+        $(document).ready(function() {
+          addthis.layers({
+            'theme' : 'transparent',
+            'share' : {
+              'position' : 'right',
+              'numPreferredServices' : 5
+            }
+          });
+        });
+      </script>
+      <script type="text/javascript">
+            var disqus_shortname = 'thecrimson';
+            var disqus_url = 'http://features.thecrimson.com/2014/senior-survey/';
+            (function() {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.src = 'http://thecrimson.disqus.com/embed.js';
+                dsq.async = true;
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0])
+                    .appendChild(dsq);
+            })();
+      </script>
+
+    </head>
+
+    <body>
+      <div class="topbar">
+        <div class="logo"><a href="http://thecrimson.com" target="new">The Harvard Crimson</a></div>
+        <a href="http://www.thecrimson.com/topic/commencement-2014/" target="new"><div class="link-commencement">Commencement 2014</div></a>
+        <a href="http://thecrimson.com/topic/commencement-2014/senior-section/" target="new"><div class="link-seniors">Senior Section</div></a>
+      </div>
+
+      <header>
+        <div class="header-content">
+          <h1>The Class of 2014 <em>By The Numbers</em></h1>
+          <h3>
+            by <span class="name"><a href="http://www.thecrimson.com/writer/1206815/Rebecca_D._Robbins/" target="new">Rebecca D. Robbins</a></span>, contributing analysis by <span class="name"><a href="http://www.thecrimson.com/writer/1206442/Radhika__Jain/" target="new">Radhika Jain</a></span>, <span class="name"><a href="http://www.thecrimson.com/writer/1206556/Hana_N._Rouse/" target="new">Hana N. Rouse</a></span>, <span class="name"><a href="http://www.thecrimson.com/writer/1206331/Robert_S_Samuels/" target="new">Robert S. Samuels</a></span>, and <span class="name"><a href="http://www.thecrimson.com/writer/1206816/Justin_C.%20_Worland%20/" target="new">Justin C. Worland</a></span>,<br> produced by <span class="name">Angela C. Li</span>and <span class="name">M. Kusunoki</span>
+          </h3>
+        </div>
+      </header>
+
+      <div class="intro"><div class="intro-content"></div></div>
+      
+      <nav>
+        <a href="http://thecrimson.com/topic/commencement-2014/"><div class="link-commencement">
+          <span class="one">The Harvard Crimson</span>
+          <span class="two">Commencement 2014</span>
+        </div></a>
+        <ul>
+          <li><a href="#section-1">Post.Harvard</a></li>
+          <li><a href="#section-2">A Diverse Class</a></li>
+          <li><a href="#section-3">Academics &amp; Cheating</a></li>
+          <li><a href="#section-4">&ldquo;Extracurriculars&rdquo;</a></li>
+          <li><a href="#section-5">Mental Health &amp; Sexual Assault</a></li>
+          <li><a href="#section-6">Senior Citizens</a></li>
+          <li><a href="#section-7">Grading Harvard</a></li>
+        </ul>
+      </nav>
+
+      <div class="main">
+        <section id="section-1" class="current first head">
+          <div class="section-intro">
+            <div class="intro-title">Post.Harvard</div>
+            <div class="intro-content"></div>
+          </div>
+          <div class="section-viz">
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-num">39%</div>
+                <div class="numbers-desc">hail from MA, NY, CA, or Washington, D.C.</div>
+                <div class="numbers-num">64%</div>
+                <div class="numbers-desc">will live in MA, NY, CA, or Washington, D.C. after graduation</div>
+                <div class="numbers-num">26%</div>
+                <div class="numbers-desc">will return to their home state</div>
+              </div>
+            </div>
+            <div class="component">
+             <div class="graph">
+                <div class="graph-title">Starting salary by gender</div>
+                <div class="graph-graph" id="section1-graph3"></div>
+              </div>
+            </div>
+            <div class="component">
+             <div class="graph">
+                <div class="graph-title">Field by gender</div>
+                <div class="graph-graph" id="section1-graph4"></div>
+              </div>
+            </div>
+            <div class="component">
+             <div class="graph">
+                <div class="graph-title">Field next year vs. field in ten years</div>
+                <div class="graph-graph" id="section1-graph5"></div>
+              </div>
+            </div>
+            <div class="component">
+             <div class="graph">
+                <div class="graph-title">Working seniors going into consulting or finance by year</div>
+                <div class="graph-graph" id="section1-graph6"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-2" class="head tail">
+          <div class="section-intro">
+            <div class="intro-title">A Diverse Class</div>
+            <div class="intro-content"></div>
+          </div>
+          <div class="section-viz">
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-num">15%</div>
+                <div class="numbers-desc">identify as homosexual, bisexual, questioning, or other</div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="graph">
+                <div class="graph-title">Self-reported socioeconomic class by family income</div>
+                <div class="graph-graph" id="section2-graph2"></div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-num">38%</div>
+                <div class="numbers-desc">are agnostic or atheist</div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-num">20.39%</div>
+                <div class="numbers-desc">of non-Hispanic white or European American seniors are legacies</div>
+                <div class="numbers-num">4.52%</div>
+                <div class="numbers-desc">of students of all other ethnicities are legacies</div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="graph">
+                <div class="graph-title">Seniors who have felt marginalized because of their race at Harvard</div>
+                <div class="graph-graph" id="section2-graph5"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-3" class="head tail">
+          <div class="section-intro">
+            <div class="intro-title">Academics &amp; Cheating</div>
+            <div class="intro-content"></div>
+          </div>
+          <div class="section-viz">
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-num">17%</div>
+                <div class="numbers-desc">admitted to cheating in academics at Harvard</div>
+                <div class="numbers-num">5%</div>
+                <div class="numbers-desc">have gone before the Ad Board for a disciplinary issue at Harvard</div>
+                <div class="numbers-num">12%</div>
+                <div class="numbers-desc">feel an honor code would have changed their approach to academic integrity at Harvard</div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-title">Seniors who are recruited athletes are ...</div>
+                <div class="numbers-num">2.8x</div>
+                <div class="numbers-desc">more likely to be economics concentrators</div>
+                <div class="numbers-num">2x</div>
+                <div class="numbers-desc">more likely to be government concentrators</div>
+                <div class="numbers-num">2x</div>
+                <div class="numbers-desc">more likely to admit to cheating in academics</div>
+                <br/>
+                <div class="numbers-title">... than seniors who were not recruited to play a varsity sport at Harvard</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-4" class="head tail">
+          <div class="section-intro">
+            <div class="intro-title">&ldquo;Extracurriculars&rdquo;</div>
+            <div class="intro-content"></div>
+          </div>
+          <div class="section-viz">
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-num">21%</div>
+                <div class="numbers-desc">are virgins</div>
+                <div class="numbers-num">12%</div>
+                <div class="numbers-desc">have had 10 or more sexual partners</div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-num">48%</div>
+                <div class="numbers-desc">of males watch porn multiple times a week</div>
+                <div class="numbers-num">59%</div>
+                <div class="numbers-desc">of females have never watched porn at Harvard</div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-num">81%</div>
+                <div class="numbers-desc">of male final club / fraternity members drink two or more times a week</div>
+                <div class="numbers-num">60%</div>
+                <div class="numbers-desc">of female final club / sorority members drink two or more times a week</div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="graph">
+                <div class="graph-title">Frequency of alcohol consumption</div>
+                <div class="graph-graph" id="section4-graph4-1"></div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-num">1</div>
+                <div class="numbers-desc">Median number of dating partners during time at Harvard</div>
+                <div class="numbers-num">2</div>
+                <div class="numbers-desc">Median number of sexual partners during time at Harvard</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-5" class="head tail">
+          <div class="section-intro">
+            <div class="intro-title">Mental Health &amp; Sexual Assault</div>
+            <div class="intro-content"></div>
+          </div>
+          <div class="section-viz">
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-num">42%</div>
+                <div class="numbers-desc">have sought some form of mental health counseling at Harvard</div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-title">Sexuality and mental health</div>
+                <div class="numbers-num">37%</div>
+                <div class="numbers-desc">of heterosexual seniors have sought mental health counseling during their time at Harvard</div>
+                <div class="numbers-num">67%</div>
+                <div class="numbers-desc">of homosexual, bisexual, questioning, or other seniors have sought mental health counseling during their time at Harvard</div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="graph">
+                <div class="graph-title">Satisfaction with help received from various mental health services</div>
+                <div class="graph-graph" id="section5-graph3"></div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-num">12%</div>
+                <div class="numbers-desc">of females were sexually assaulted at Harvard</div>
+                <div class="numbers-num">2%</div>
+                <div class="numbers-desc">of males were sexually assaulted at Harvard</div>
+                <div class="numbers-num">16%</div>
+                <div class="numbers-desc">of sexual assault victims reported their assault</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-6" class="head tail">
+          <div class="section-intro">
+            <div class="intro-title">Senior Citizens</div>
+            <div class="intro-content"></div>
+          </div>
+          <div class="section-viz">
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-num">80%</div>
+                <div class="numbers-desc">of seniors who voted in 2012 cast their ballot for Obama</div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="graph">
+                <div class="graph-title">Their politics</div>
+                <div class="graph-graph hasbg" id="section6-graph2"></div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="graph">
+                <div class="graph-title">Political approval ratings</div>
+                <div class="graph-graph" id="section6-graph3"></div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-num">26%</div>
+                <div class="numbers-desc">of seniors going into finance are liberal or very liberal</div>
+                <div class="numbers-num">59%</div>
+                <div class="numbers-desc">of conservative or very conservative seniors support same-sex marriage</div>
+                <div class="numbers-num">91%</div>
+                <div class="numbers-desc">of seniors who use marijuana at least twice a semester support legalization</div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-title">Future politicians and government workers</div>
+                <div class="numbers-num">7%</div>
+                <div class="numbers-desc">of seniors going into government or politics 10 years from now have cheated at Harvard</div>
+                <div class="numbers-num">39%</div>
+                <div class="numbers-desc">of seniors going into government or politics 10 years from now have used marijuana</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-7" class="tail last">
+          <div class="section-intro">
+            <div class="intro-title">Grading Harvard</div>
+            <div class="intro-content"></div>
+          </div>
+          <div class="section-viz">
+            <div class="component">
+              <div class="graph">
+                <div class="graph-title">Harvard approval ratings</div>
+                <div class="graph-graph" id="section7-graph1-1"></div>
+                <div class="graph-graph" id="section7-graph1-2"></div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="graph">
+                <div class="graph-title">Should Harvard divest its endowment from fossil fuel companies?</div>
+                <div class="graph-graph" id="section7-graph2"></div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-num">39%</div>
+                <div class="numbers-desc">of seniors who considered Harvard's investment in fossil fuels when asked to participate in Senior Gift did not give</div>
+                <div class="numbers-num">16%</div>
+                <div class="numbers-desc">of seniors going into finance support Harvard's divestment</div>
+              </div>
+            </div>
+            <div class="component">
+              <div class="numbers">
+                <div class="numbers-num">88%</div>
+                <div class="numbers-desc">were satisfied or very satisfied with their living arrangements</div>
+                <div class="numbers-num">92%</div>
+                <div class="numbers-desc">would choose Harvard again</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+
+      <footer>
+        <div class="footer-content">
+          <em>This article has been revised to reflect the following correction:</em><br><br>
+
+          <strong>CORRECTION: June 2, 2014</strong><br><br>
+
+          An earlier version of a graph accompanying this article that compares by year the percentage of working graduating seniors going into consulting or finance after graduation was mislabeled. In fact, the graph compares the proportion of working seniors who will enter the two fields, rather than the proportion of all seniors doing so.
+
+          <div id="disqus_thread" style="display, none"></div>
+        </div>
+      </footer>
+    </body>
+</html>

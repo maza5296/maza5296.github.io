@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+circle {
+  fill: rgb(31, 119, 180);
+  fill-opacity: .25;
+  stroke: rgb(31, 119, 180);
+  stroke-width: 1px;
+}
+
+.leaf circle {
+  fill: #ff7f0e;
+  fill-opacity: 1;
+}
+
+text {
+  font: 10px sans-serif;
+}
+
+</style>
+<body>
+<label><input type="radio" name="test" value="force" onclick="click()" checked> Click</label>
+<label><input type="radio" name="test" value="force"> No</label><br>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var root
+var dataset
+var all_year_data = [];
+var all_year_trade =[];
+var links = [];
+var links_id = [];
+
+var diameter = 960,
+    format = d3.format(",d");
+
+var pack = d3.layout.pack()
+    .size([diameter - 4, diameter - 4])
+    .value(function(d) { return d.size; });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", diameter)
+    .attr("height", diameter)
+  .append("g")
+    .attr("transform", "translate(2,2)");
+
+
+d3.json("data/countries_1995_2012.json", function(data) {
+  downloaded_data = data; 
+  downloaded_data.map(function(d,i){
+    for (i = 0; i < d.years.length; i++) {
+      var each = {
+        name: d.name,
+        continent: d.continent,
+        country_id: d.country_id,
+        gdp: d.years[i].gdp,
+        life_expectancy: d.years[i].life_expectancy,
+        population: d.years[i].population,
+        year: d.years[i].year,
+        latitude: d.latitude,
+        longitude: d.longitude,
+      };  
+      all_year_data.push(each);
+      var every = {
+        source: d.country_id,
+        target: d.years[i].top_partners,
+        year: d.years[i].year,
+      }
+      all_year_trade.push(every);
+    }
+  });
+  year_selection(2012);
+});
+
+function year_selection (year) {
+  var newYear = year;
+  dataset = all_year_data.filter(function(d){
+    return d.year == newYear;
+  });
+  
+  nested_links = all_year_trade.filter(function(d){
+    return d.year == newYear;
+  })
+
+  nested_links.map(function(d){
+    for(i = 0; i < d.target.length; i++) {
+      var each = {
+        source: d.source,
+        target: d.target[i].country_id,
+        export_value: d.target[i].total_export,
+      }
+      if(typeof(each.source != "undefined" && each.target != "undefined")) {
+        links_id.push(each);
+      }
+    }
+  });
+
+  links_id.forEach(function(e) {
+    var sourceNode = dataset.filter(function(n) {
+        return e.source === n.country_id;
+    })[0],
+        targetNode = dataset.filter(function(n) {
+            return e.target === n.country_id;
+        })[0];
+
+    if(typeof targetNode != "undefined") {
+      links.push({
+          source: sourceNode,
+          target: targetNode,
+          export_value: e.export_value,
+      });
+    }
+  });
+  console.log(links);
+  render();
+}
+
+function render(){
+  var nested_root = d3.nest()
+                .key(function(d) {return d.continent;}) 
+                .entries(dataset);
+
+  console.log(nested_root);
+
+  var tmp_africa = [];
+  var tmp_europe = [];
+  var tmp_asia = [];
+  var tmp_america = [];
+  var tmp_oceania = [];
+  var root = [];
+
+  console.log(dataset);
+
+  dataset.map(function(d,i){
+    for (i = 0; i < dataset.length; i++)
+      if(d.continent == "Africa"){
+        var each1 = {
+          country_id: d.country_id,
+          name: d.name,
+          size: d.gdp,
+        }
+        tmp_africa.push(each1);
+      }
+      else if(d.continent == "Asia"){
+        var each2 = {
+          country_id: d.country_id,
+          name: d.name,
+          size: d.gdp,
+        }
+        tmp_asia.push(each2);
+      }
+      else if(d.continent == "Americas"){
+        var each3 = {
+          country_id: d.country_id,
+          name: d.name,
+          size: d.gdp,
+        }
+        tmp_america.push(each3);
+      }
+      else if(d.continent == "Europe"){
+        var each4 = {
+          country_id: d.country_id,
+          name: d.name,
+          size: d.gdp,
+        }
+        tmp_europe.push(each4);
+      }
+      else if(d.continent == "Oceania"){
+        var each5 = {
+          country_id: d.country_id,
+          name: d.name,
+          size: d.gdp,
+        }
+        tmp_oceania.push(each5);
+      }
+  });
+  console.log(tmp_oceania);
+  root = {"name": "globe",
+              "children" : [
+              {"name": "Asia",
+              "children": tmp_asia}, 
+              {"name": "Europe",
+              "children": tmp_europe},
+              {"name": "Africa",
+              "children": tmp_africa},
+              {"name": "Americas",
+               "children": tmp_america},
+               {"name": "Oceania",
+               "children": tmp_oceania},]}
+
+
+  var node = svg.datum(root).selectAll(".node")
+      .data(pack.nodes)
+    .enter().append("g")
+      .attr("class", function(d) { return d.children ? "node" : "leaf node"; })
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+  node.append("title")
+      .text(function(d) { return d.name + (d.children ? "" : "\nGDP: " + format(d.size)); });
+
+  node.append("circle")
+      .attr("r", 0)
+      .transition().duration(500)
+      .attr("r", function(d) { return d.r; });
+
+  node.filter(function(d) { return !d.children; }).append("text")
+      .attr("dy", ".3em")
+      .style("text-anchor", "middle")
+      .text(function(d) { return d.name.substring(0, d.r / 3); });
+
+      console.log(root);
+      console.log(links);
+
+    var link = svg.selectAll(".link")
+        .data(links);
+
+    link
+      .enter().append("line");
+
+    link
+        .attr("class", "link");
+
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+}
+
+
+d3.select(self.frameElement).style("height", diameter + "px");
+
+</script>

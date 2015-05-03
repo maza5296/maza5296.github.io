@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Add</title>
+<script src="js/jQuery.min.js"></script>
+<script src="js/controller.js"></script>
+<script src="js/aes2.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/myStyle.css">
+<link rel="stylesheet" type="text/css" href="css/mobilenav.css">
+</head>
+<body>
+
+<!-- navbar -->
+<nav class="navbar navbar-tab">
+  <ul class="nav nav-tabs">
+    <li role="presentation"><a href="index.html">AESPassManager</a></li>
+    <li role="presentation"><a href="search.html">Search</a></li>
+    <li role="presentation" class="active"><a href="add.html">Add</a></li>
+  </ul>
+</nav>
+
+<div id="authenticate" display="block">
+  <div id="option">
+    <h3>Add a Password to your Vault</h3>
+    <form name="test" class="form-inline"><br>
+      <div class="form-group">
+        <label>URL to Add: </label>
+        <input type="text" class="form-control" name="urladd" placeholder="example.com">
+      </div><br>
+      <div class="form-group">
+        <label>Password: </label>
+        <input type="password" class="form-control" name="pwdadd" placeholder="Password to Add">
+      </div><br>
+      <div class="form-group">
+        <label>Master Password: </label>
+        <input type="password" class="form-control" name="mastpass" placeholder="Master Password">
+      </div><br>
+      <input type="button" id="add" class="btn btn-primary" value="Add">
+      <input type="reset" id="cancel1" class="btn btn-default" value="Cancel"/>
+    </form>
+  </div>
+</div>
+<div id="reveal"></div>
+<div id="password"></div>
+</body>
+</html>

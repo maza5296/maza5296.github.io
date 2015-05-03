@@ -1,0 +1,381 @@
+@import url("http://fonts.googleapis.com/css?family=Pacifico");
+@import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900");
+@import url("http://fonts.googleapis.com/css?family=Lato:300");
+html, body {
+  min-width: 1360px;
+  margin: 0;
+  padding: 0;
+  font-family: "Source Sans Pro"; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  font-weight: normal; }
+
+a {
+  color: inherit;
+  text-decoration: none; }
+
+::selection, ::-moz-selection {
+  background: rgba(0, 0, 0, 0.9);
+  color: #FFF; }
+
+.topbar {
+  color: #FFF !important;
+  background: #222;
+  height: 40px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  opacity: 0.8;
+  z-index: 10; }
+  .topbar a:hover {
+    opacity: 0.7; }
+  .topbar .logo {
+    display: inline-block;
+    color: #FFF;
+    font-family: "Big Caslon", Georgia, serif;
+    line-height: 40px;
+    padding-left: 14px;
+    padding-right: 24px; }
+  .topbar .link-commencement {
+    display: inline-block;
+    font-weight: 200;
+    padding-right: 24px; }
+  .topbar .link-seniors {
+    display: inline-block;
+    font-weight: 200; }
+
+header {
+  background: url(../img/header.jpg) no-repeat center;
+  background-size: cover;
+  overflow: auto; }
+  header .header-content {
+    padding-top: 60px; }
+    header .header-content h1 {
+      color: #FFF;
+      font-family: "Pacifico";
+      font-size: 72px;
+      text-align: center;
+      text-shadow: 2px 2px 8px #000; }
+      header .header-content h1 em {
+        font-family: "Source Sans Pro";
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 200;
+        text-shadow: 2px 2px 4px #000;
+        text-transform: lowercase; }
+    header .header-content h2 {
+      color: #FFF;
+      font-weight: 200;
+      margin-top: -4px;
+      text-align: center;
+      text-shadow: 2px 2px 4px #000; }
+      header .header-content h2 a {
+        border-bottom: 1px dotted #FFF; }
+        header .header-content h2 a:hover {
+          border-bottom: 1px solid #FFF; }
+    header .header-content h3 {
+      font-size: 14px;
+      font-weight: 200;
+      width: 480px;
+      margin: 40px auto 0;
+      text-align: center;
+      text-shadow: 2px 2px 8px #000; }
+      header .header-content h3 .name {
+        font-weight: 600;
+        text-transform: uppercase; }
+        header .header-content h3 .name a:hover {
+          opacity: 0.7; }
+
+.intro {
+  background: white; }
+  .intro .intro-content {
+    width: 960px;
+    margin: 0 auto;
+    padding: 80px 0;
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    -webkit-column-gap: 60px;
+    -moz-column-gap: 60px;
+    column-gap: 60px;
+    color: #554;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.6em; }
+  .intro p {
+    margin-top: 0; }
+
+nav {
+  position: fixed;
+  width: 100%;
+  padding: 40px 0px 12px 50px;
+  background: #fff;
+  color: black;
+  opacity: 0;
+  z-index: 3;
+  transition: all 0.5s; 
+  transform: rotateX(-90deg);
+  }
+  nav.stuck {
+    position: fixed;
+    top: 0px;
+    opacity: 0.8;
+    transform: rotateX(0deg);}
+  nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+  nav li {
+    margin: 12px 12px;
+    float: left; }
+  nav li:hover {
+        -webkit-animation: swing 1s ease;
+        animation: swing 1s ease;
+        -webkit-animation-iteration-count: 1;
+        animation-iteration-count: 1; }
+  nav a {
+    font-weight: 900;
+    text-transform: uppercase; }
+    nav a:hover {
+      opacity: 0.7;
+    }
+    nav a.active {
+      opacity: 0.7; }
+    nav a.navsection-1{
+      color: #c40009;
+    }
+    nav a.navsection-2{
+      color: #2b2b91;
+    }
+    nav a.navsection-3{
+      color: #c49100;
+    }
+    nav a.navsection-4{
+      color: #005e3c;
+    }
+    nav a.navsection-5{
+      color: #4d1a91;
+    }
+    nav a.navsection-6{
+      color: #c53200;
+    }
+    nav a.navsection-7{
+      color: #555555;
+    }
+  nav .link-commencement {
+    box-sizing: border-box;
+    display: none;
+    margin-bottom: 20px;
+    padding: 16px 12px;
+    border: 0px solid #FFF;
+    text-align: center; }
+    nav .link-commencement:hover {
+      opacity: 0.7; }
+    nav .link-commencement .one {
+      display: block;
+      font-family: "Big Caslon", "Georgia";
+      font-size: 16px;
+      font-weight: 200;
+      text-transform: none; }
+    nav .link-commencement .two {
+      display: block;
+      font-family: "Lato";
+      letter-spacing: 1px;
+      padding-top: 4px;
+      font-size: 11px;
+      font-weight: 300; }
+
+footer {
+  background: url(../img/footer.jpg) no-repeat center;
+  background-size: cover;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  overflow: auto; }
+  footer .footer-content {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 5% 30%; }
+
+#disqus_thread {
+  margin-top: 50px;
+  display: none;
+}
+
+section {
+  opacity: 0;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+  padding: 40px 0; }
+  section .section-intro {
+    position: absolute;
+    margin-left: 280px;
+    width: 420px; }
+    section .section-intro .intro-title {
+      margin: 8px 0 20px;
+      font-size: 24px;
+      font-weight: 900;
+      text-transform: uppercase; }
+    section .section-intro .intro-content {
+      font-weight: 200;
+      font-size: 18px; }
+      section .section-intro .intro-content a {
+        border-bottom: 1px dotted #FFF; }
+        section .section-intro .intro-content a:hover {
+          border-bottom: 1px solid #FFF; }
+  section .section-viz {
+    margin-left: 780px;
+    width: 600px; }
+
+section.current {
+  opacity: 1; }
+
+body {
+  background: white;
+  color: white;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s; }
+
+.section-1, #section-1 {
+  background: #c40009;
+  color: white; }
+
+.section-2 {
+  background: #2b2b91;
+  color: white; }
+
+.section-3 {
+  background: #c49100;
+  color: black; }
+  .section-3 .intro-content a {
+    border-bottom: 1px dotted #000 !important; }
+    .section-3 .intro-content a:hover {
+      border-bottom: 1px solid #000 !important; }
+  .section-3 .link-commencement {
+    border: 0px solid #000 !important; }
+
+.section-4 {
+  background: #005e3c;
+  color: white; }
+
+.section-5 {
+  background: #4d1a91;
+  color: white; }
+
+.section-6 {
+  background: #c53200;
+  color: white; }
+
+.section-7 {
+  background: #555555;
+  color: white; }
+
+.section-viz {
+  min-height: 800px; }
+
+.component {
+  padding-bottom: 24px; }
+  .component + .component {
+    padding: 24px 0;
+    border-top: 1px dotted rgba(255, 255, 255, 0.3); }
+
+#section-3 .component + .component, #section-6 .component + .component {
+  border-top: 1px dotted rgba(0, 0, 0, 0.8); }
+
+.numbers .numbers-title {
+  font-style: italic;
+  margin-bottom: 12px; }
+.numbers .numbers-num {
+  font-size: 48px;
+  font-weight: 900; }
+.numbers .numbers-desc {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600; }
+.numbers .numbers-desc + .numbers-num {
+  margin-top: 12px; }
+
+.graph .graph-title {
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase; }
+.graph .graph-graph {
+  margin: 20px 0 12px -10px; }
+  .graph .graph-graph.todo {
+    margin: 12px 0;
+    padding: 20px;
+    height: 200px;
+    border: 1px solid rgba(0, 0, 0, 0.5); }
+.graph .graph-graph.hasbg {
+  margin: 20px 0 12px 0; }
+
+
+
+
+  @-webkit-keyframes swing
+{
+    15%
+    {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+    30%
+    {
+        -webkit-transform: translateX(-5px);
+       transform: translateX(-5px);
+    } 
+    50%
+    {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+    65%
+    {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+    80%
+    {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+    100%
+    {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+@keyframes swing
+{
+    15%
+    {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+    30%
+    {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+    }
+    50%
+    {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+    65%
+    {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+    80%
+    {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+    100%
+    {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
