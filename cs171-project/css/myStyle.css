@@ -1,0 +1,70 @@
+body{
+    font-family: 'PT Sans', sans-serif;
+    background-color: #ddd4bc;
+}
+
+#worldmap{
+	position: relative;
+	width: 1000px; height: 700px;
+}
+
+.axis text {
+    font: 10px sans-serif;
+}
+
+.axis line {
+	stroke-width: 0.2;
+}
+.axis path {
+    fill: none;
+    stroke: #000;
+    stroke-width: 0.2;
+    shape-rendering: crispEdges;
+}
+
+.jumbotron{
+    text-align: center;
+    background: url('../img/jumbotron.jpg') 100%;
+    background-position: center;
+    background-size: cover;
+    min-height: 1000px;
+}
+
+.intro{
+    margin-top: 200px;
+}
+
+#name {
+    font-size: 200%;
+}
+.navbar-default .navbar-nav > li > a {
+  color: white;
+  font-size: 150%;
+}
+
+
+tbody, thead{
+    background-color: #ABDDA4;
+}
+
+#table {
+    margin-top: -25px;
+}
+
+.navbar-inverse {
+    background-color: black;
+
+}
+
+#airline_ranking_wrapper {
+    outline: 1px solid black;
+
+}
+tr::before{
+	display: none !important;
+}
+tr::after{
+	display: none !important;
+}
+
+#airline_ranking_wrapper > div:nth-child(1) > div:nth-child(1) { display: none;}

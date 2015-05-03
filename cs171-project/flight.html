@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Final Project</title>
+
+    <!-- ADD Libraries-->
+    <script src="libs/d3/d3.min.js" charset="utf-8"></script>
+    <script src="libs/d3/d3.svg.multibrush.js" charset="utf-8"></script>
+    <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
+    <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="http://d3js.org/queue.v1.min.js" charset="utf-8"></script>
+    <script src="https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js" charset="utf-8"></script>
+	<script src="https://cdn.datatables.net/plug-ins/1.10.6/integration/bootstrap/3/dataTables.bootstrap.js" charset="utf-8"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+    <script src="libs/datamaps/datamaps.all.js"></script>
+
+
+    <!--Stylesheets-->
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
+
+    <!-- Get some nice font-->
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <script src = "js/worldmap.js"></script>
+    <script src = "js/table.js"></script>
+    <script src = "js/linechart.js"></script>
+    <script src = "js/barchart.js"></script>
+    <script src = "js/toCapital.js"></script>
+
+    <!-- add own stylesheet-->
+    <link rel="stylesheet" type="text/css" href="css/myStyle.css">
+
+</head>
+<style>
+   caption {
+     font-weight: bold;
+     text-align: center;
+     font-size: 200%
+   }
+
+   #filter_table {
+    font-size: 100%;
+    margin-left: 40px;
+   }
+
+   .datamap, .bar{
+    outline: 1px solid black;
+
+   }
+   #routevis {
+    margin-left: 40px;
+   }
+
+   .line {
+    outline: 1px solid black;
+   }
+
+   #title {
+    font-family: Avenir;
+    font-size: 400%;
+    margin-top: 80px;
+  
+   }
+
+   #worldmap {
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 500px;
+    width: 700px;
+   }
+
+
+   .container{
+    margin-left: 20px;
+   }
+
+   .bottom{
+    margin-top: 100px;
+    margin-left: 40px;
+    width: 1200px;
+   }
+
+    #airline_ranking_filter {
+        margin-right: 20px !important;
+    }
+
+    .heading{
+        font-weight: bold;
+        color: #d9411e;
+    }
+
+</style>
+<body>
+<div class="container">
+    <!-- row 1: navigation -->
+    <div class="row">
+        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="glyphicon glyphicon-arrow-down"></span>
+                  MENU
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="collapse">
+                <div class="container">
+                    <h2 id="name" class="nav navbar-nav navbar-left"><a href="index.html">Flight Data</a></h2>
+                <ul class="nav navbar-nav navbar-right links">
+                    <li class="active"><a href="about.html">Home Page</a></li>
+                    <li><a href="flight.html">Visualization</a></li>
+                </ul> 
+                </div>
+            </div>
+         </nav> 
+    </div>
+</div>
+    
+    <div class="container">   
+        <h1 id="title">Final Project - Flight Data</h1>
+
+        <div class="row">
+            <div class="col-md-8 col-sm-12">
+               <p></p>
+            </div>
+
+        </div>
+        <div class="row">
+           
+        </div>
+        <div class="row" style="width:1800px;">
+             <h3 class="heading" id="routevis"> Route Visualization </h3>
+             <div id="filter_table" style="margin-left:40px;">Filter by: 
+                <label><input type="radio" class="continent_filter" name="Americas" value="Americas" title="Americas">Americas</input></label>
+                <label><input type="radio" class="continent_filter" name="Africa" value="Africa" title="Africa" >Africa</input></label>
+                <label><input type="radio" class="continent_filter" name="Asia" value="Asia" title="Asia">Asia</input></label>
+                <label><input type="radio" class="continent_filter" name="Europe" value="Europe" title="Europe" >Europe</input></label>
+                <label><input type="radio" class="continent_filter" name="Oceania" value="Oceania" title="Oceania" >Oceania</input></label>
+            </div>
+            <div id="worldmap" class="col-md-7"></div>
+            <div id="table" class="col-md-4">
+                <h3 class="heading" > Airline Ranking </h3>
+            </div>
+        </div>
+
+        <div class="row bottom">
+            <div id="linechart" class="col-md-6">
+                <h3 class="heading"> Passenger Numbers </h3>
+                <svg class="line" width="650" height="330"></svg>
+            </div>
+            
+            <div id="barchart2" class="col-md-3 col-md-offset-2">
+                <h3 class="heading"> Top 10 Flight Destination (Worldwide) </h3>
+            </div>
+            
+        </div>
+    </div>
+
+
+
+    <script>
+        $(function(){ 
+
+
+            var citiesToCities = [];
+            var metaDataCities = {};
+            var completeData = [];
+            var airlineRouteCounts = [];
+            var domesticCitiyConnectionsCountByCountry = [];
+            var countriesToCountries = [];
+
+            var dateFormatter = d3.time.format("%Y-%m-%d");
+
+
+            var initVis = function(){
+
+                var MyEventHandler = new Object();
+                
+             
+                var barchart2 = new BarChart(d3.select("#barchart2"), metaDataCities, MyEventHandler);  
+                 var table = new Table(d3.select("table"), airlineRouteCounts, MyEventHandler);
+
+                var worldmap = new WorldMap(d3.select("#worldmap"), citiesToCities, metaDataCities, countriesToCountries, MyEventHandler);
+                var linechart = new LineChart(d3.select("#linechart"), UNData, MyEventHandler);
+                
+                $(MyEventHandler).bind("selectionChanged", function(event, args){
+
+                    console.log(args);
+                    barchart2.onSelectionChange(args);
+        
+                  });
+
+            }
+
+            var dataLoaded = function (error, _citiesToCities, _metaDataCities, _completeTable, _airlineRouteCounts, _countriesToCountries, _countryList, _UNData) {
+
+                if (!error) {
+
+                    citiesToCities = _citiesToCities;
+
+                    // exported to citiesToCities_noduplicates.json to optimize loading times, code below was used to generate .json
+                    /*
+                       citiesToCities_with_duplicates = _citiesToCities.map(function (d) {
+                                return {
+                                    origin: { 
+                                        city: d["departure_city"],
+                                        longitude: parseFloat(d["long_departure_(decimal)"]),
+                                        latitude: parseFloat(d["lat_departure_(decimal)"]),
+                                        country: d["departure_country"]
+                                    },
+
+                                    destination: {
+                                        city: d["arrival_city"],
+                                        longitude: parseFloat(d["long_arrival_(decimal)"]),
+                                        latitude: parseFloat(d["lat_arrival_(decimal)"]),
+                                        country: d["arrival_country"]
+                                    },
+
+                                    number_of_routes: parseInt(d["number_of_routes"])
+                                };
+                            }
+                        )
+
+                        console.log("start filter")
+                        //TODO: make more efficient 
+                        //remove duplicate items in dataset (i.e. MUC->BOS and BOS->MUC)
+                        citiesToCities_with_duplicates.forEach(function(a){
+                            if (citiesToCities.filter(function(b) { return b.destination.city == a.origin.city && b.origin.city == a.destination.city}).length < 1)
+                                citiesToCities.push(a);
+                        });
+                        
+                        console.log("stop filter")
+
+                        d3.select("body").append("pre").text(JSON.stringify(citiesToCities, null, 4));
+
+                    */
+
+                        metaDataCities = _metaDataCities.map(function (d) {
+            
+                            return {
+                                name: d["city_name"],
+                                country: d["country_name"],
+                                most_active_airport: {
+                                    name: d["most_active_airport"],
+                                    longitude: d["long_most_active_airport"],
+                                    latitude: d["lat_most_active_airport"],
+                                },
+
+                                avg_distance: parseInt(d["average_distance"]),
+                                max_distance: parseInt(d["max._distance"]),
+                                number_incoming_domestic_flights: parseInt(d["number_incoming_domestic_flights"]),
+                                number_incoming_flights: parseInt(d["number_incoming_flights"]),
+                                number_incoming_international_flights: parseInt(d["number_incoming_international_flights"]),
+                                number_of_routes: parseInt(d["number_of_routes"]),
+                                number_outcoming_domestic_flights: parseInt(d["number_outcoming_domestic_flights"]),
+                                number_outcoming_flights: parseInt(d["number_outcoming_flights"]),
+                                number_outcoming_international_flights: parseInt(d["number_outcoming_international_flights"]),
+                                only_domestic_flights: (d["only_domestic_flights"] == 1 ? true : false)
+                            } 
+                        });
+
+                        airlineRouteCounts = _airlineRouteCounts;
+
+                        //exported to airlineRouteCounts.json to optimize loading times, code below was used to generate .json
+                        /*
+
+                        var i = 0
+                        prev = ""
+                        _completeTable.forEach(function(d){
+                            if (airlineRouteCounts.length == 0 || prev != d["airline name"])
+                            {
+                                var res = {};
+                                res.count = 0
+                                res.airline = d["airline name"]
+                                res.country = d["airline country"]
+                                res.continent = d["airline continent"]
+                                prev = d["airline name"]
+                                _completeTable.forEach(function(e){
+                                    if (e["airline name"] == res.airline)
+                                    {
+                                        res.count++;
+                                    }
+                                })
+                                airlineRouteCounts[i] = res;
+                                i++;
+                            }
+                        })
+
+                        airlineRouteCounts.sort(function(a,b){
+                            return d3.descending(a.count, b.count)
+                        })
+
+                           d3.select("body").append("pre").text(JSON.stringify(airlineRouteCounts, null, 4));
+                        */
+
+                        /*console.log("start filter")
+                        _completeTable.forEach(function(a){
+
+                            if (airportToAirport.filter(function(b) {
+                                return b["arrival airport"] == a["departure airport"] && b["departure airport"] == a["departure airport"]
+                                || b["arrival airport"] == a["arrival airport"] && b["departure airport"] == a["departure airport"] 
+                            }).length < 1) {
+                                a["airline name"] = undefined; // better performance than delete, and also works if we export a JSON file afterwards
+                                a["airline country"] = undefined;
+                                a["airline continent"] = undefined;
+                                a["active airline"] = undefined;
+                                airportToAirport.push(a);
+                            }
+                             
+                        });
+                        
+                        console.log("stop filter");
+                        debugger;
+                        */
+
+                    domesticCitiyConnectionsCountByCountry = d3.nest()
+                        .key(function(d) { return d.origin.country; })
+                        .rollup(function(leaves) { return leaves.length; })
+                        .entries(citiesToCities.filter(function(d) { return d.origin.country == d.destination.country}))
+                        .sort(function(a,b) { return b.values - a.values; });
+
+
+
+
+                        countriesToCountries = _countriesToCountries.map(function (d) {
+            
+                            return {
+                                origin: {
+                                    country: d["country departure"],
+                                    longitude: parseFloat(d["departure longitude"]),
+                                    latitude: parseFloat(d["departure latitude"]),
+                                },
+                                destination: {
+                                    country: d["country arrival"],
+                                    longitude: parseFloat(d["arrival longitude"]),
+                                    latitude: parseFloat(d["arrival latitude"]),
+                                },
+
+                                number_of_routes: parseInt(d["number of routes"])
+                            } 
+                        });
+
+
+                       /* var countries = countriesToCountries.map(function(d) { return d.origin.country}).concat(countriesToCountries.map(function(d) { return d.destination.country}));
+                        countries = countries.filter(function(v,i) { return countries.indexOf(v) == i; }).sort();
+
+                      
+
+                        var failed = [];
+
+                        var country = "";
+
+                        var finished = 0;
+
+                        for (var i = countries.length - 1; i >= 0; i--) {
+                            country = countries[i];
+
+                           // var e = new Date().getTime() + (0.5 * 1000);
+                            //while (new Date().getTime() <= e) {}
+
+                             d3.json("http://maps.googleapis.com/maps/api/geocode/json?language=en&address=" + country, function(error, json) {
+                                var google_country_name = google_country_name;
+                            
+                                finished++;
+                                if (finished == countries.length)
+                                    debugger;
+
+                                if (json.status != "OK")
+                                    {
+                                        console.log(google_country_name);
+                                        return;
+                                    }
+                                countriesToCountries
+                                    .filter(function(n) { return n.origin.country == google_country_name; })
+                                    .forEach(function(n) { 
+                                        n.origin.longitude = json.results[0].geometry.location.lng;
+                                        n.origin.latitude = json.results[0].geometry.location.lat;
+                                    })
+
+                                countriesToCountries
+                                    .filter(function(n) { return n.destination.country == google_country_name; })
+                                    .forEach(function(n) { 
+                                        n.destination.longitude = json.results[0].geometry.location.lng;
+                                        n.destination.latitude = json.results[0].geometry.location.lat;
+                                    })
+
+                                console.log(google_country_name + ": " + countriesToCountries
+                                    .filter(function(n) { return n.origin.country == google_country_name; }).length + " " + countriesToCountries
+                                    .filter(function(n) { return n.destination.country == google_country_name; }))
+                            });
+                        }*/
+
+                    // citiesToCitiesPass = _citiesToCitiesPass.map(function (d) {
+        
+                 
+                    //     return {
+                    //         origin: {
+                    //             city: d["city departure"],
+                    //             country: d["country departure"],
+                    //             state: d["state departure"]
+                    //         },
+                    //         destination: {
+                    //             city: d["city arrival"],
+                    //             country: d["country arrival"],
+                    //             state: d["state arrival"]
+                    //         },
+
+                    //         number_of_passengers: {
+                    //             2000: parseInt(d["number passengers 2000"]),
+                    //             2005: parseInt(d["number passengers 2005"]),
+                    //             2010: parseInt(d["number passengers 2010"])
+                    //         }
+                    //     } 
+                    // });
+                    countryList = {};
+                    _countryList.map(function(d){
+                        countryList[d["name"]] = d["continent"];
+                    });
+
+                    UNData = Object.keys(_UNData).map(function(d){
+                        return {
+                            name: d.toTitleCase(),
+                            continent: (countryList[d.toTitleCase()]) ? countryList[d.toTitleCase()] : "Unknown",
+                            data: _UNData[d]
+                        }
+                    });
+                    // console unknowns
+                    // UNData.map(function(d){
+                    //     if (d.continent != "Unknown"){
+                    //         console.log(d);
+                    //     }
+                    // })
+
+                    initVis();
+                }
+                else {
+                    console.log(error);
+                }
+            }
+			
+			
+			// HELPERS 
+
+
+            var dateFormat = d3.time.format("%Y-%m-%d");
+
+            var startHere = function(){
+
+            	queue()
+                .defer(d3.json, 'data/openflight_db/citiesToCities_noduplicates.json')
+                .defer(d3.csv, 'data/openflight_db/citiesTable.csv')
+                .defer(d3.csv, 'data/openflight_db/completeTable.csv')  
+                .defer(d3.json, 'data/openflight_db/airlineRoutesCounts.json')  
+                .defer(d3.csv, 'data/openflight_db/countriesToCountries.csv') 
+                .defer(d3.csv, 'data/countrylist.csv')
+                .defer(d3.json, 'data/UNData.json')
+				.await(dataLoaded);
+
+            }
+
+            startHere();
+        })
+    </script>
+</body>
+</html>

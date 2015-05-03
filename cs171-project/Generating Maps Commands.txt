@@ -1,0 +1,29 @@
+http://www.worldatlas.com/aatlas/ctycodes.htm
+
+ogr2ogr -f GeoJSON -where "ADM0_A3 IN ('JPN')" JPN.json ne_10m_admin_1_states_provinces.shp
+
+
+topojson --id-property adm1_code -p name=NAME -p name -o JPN.topo.json JPN.json
+
+countriesToCountries.filter(function(d) { return d.origin.country == d.destination.country}).sort(function(a,b) { return b.number_of_routes - a.number_of_routes; });
+countriesToCountries.filter(function(d) { return d.origin.country == "China" && d.destination.country != "China"}).sort(function(a,b) { return b.number_of_routes - a.number_of_routes; })
+
+——
+
+brew install gdal
+
+ ~/.bash_profile:
+
+export PATH=/Library/Frameworks/GDAL.framework/Versions/1.11/Programs/:$PATH
+
+
+insert into datamaps.all.js, make country code lower case
+add country code to selectableCountries[] in worldmap.js
+
+add boiler palte code for projection in datamaps
+
+pan and zoom to set country (zoom out first)
+
+Click Route Visualiation title to get projection values and add to projection part
+
+Repeat last step if necessary
