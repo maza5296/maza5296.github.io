@@ -62,9 +62,7 @@ Table.prototype.initVis = function(){
     draw(that.data)
 
     $('#airline_ranking').dataTable({
-        "scrollY":        "400px",
-        "scrollCollapse": true,
-        "paging":         false
+        
     });
 
 

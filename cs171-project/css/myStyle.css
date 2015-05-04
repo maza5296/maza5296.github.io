@@ -1,6 +1,6 @@
 body{
     font-family: 'PT Sans', sans-serif;
-    background-color: #ddd4bc;
+    background-color: #f4f4f2;
 }
 
 #worldmap{
@@ -13,12 +13,12 @@ body{
 }
 
 .axis line {
-	stroke-width: 0.2;
+	stroke-width: 1px;
 }
 .axis path {
     fill: none;
     stroke: #000;
-    stroke-width: 0.2;
+    stroke-width: 1px;
     shape-rendering: crispEdges;
 }
 
@@ -68,3 +68,63 @@ tr::after{
 }
 
 #airline_ranking_wrapper > div:nth-child(1) > div:nth-child(1) { display: none;}
+
+caption {
+ font-weight: bold;
+ text-align: center;
+ font-size: 200%
+}
+
+#filter_table {
+font-size: 100%;
+margin-left: 40px;
+}
+
+.datamap, .bar{
+outline: 1px solid black;
+
+}
+#routevis {
+margin-left: 40px;
+}
+
+.line {
+border-style: solid black;
+border-width: 1px;
+border-radius: 5px;
+box-shadow: 0 0 5px 2px rgba(0,0,0,.35);
+}
+
+#title {
+font-family: Avenir;
+font-size: 400%;
+margin-top: 80px;
+
+}
+
+#worldmap {
+margin-left: 20px;
+margin-right: 20px;
+height: 500px;
+width: 700px;
+}
+
+
+.container{
+margin-left: 20px;
+}
+
+.bottom{
+margin-top: 100px;
+margin-left: 40px;
+width: 1200px;
+}
+
+#airline_ranking_filter {
+    margin-right: 20px !important;
+}
+
+.heading{
+    font-weight: bold;
+    color: #d9411e;
+}

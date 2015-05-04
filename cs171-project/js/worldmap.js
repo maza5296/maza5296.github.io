@@ -1,4 +1,4 @@
-WorldMap = function(_parentElement, _data, _metaData, _countriesToCountries, _eventHandler){
+WorldMap = function(_parentElement, _data, _metaData, _countriesToCountries, _completeTable, _eventHandler){
 
   var that = this;
   
@@ -6,11 +6,11 @@ WorldMap = function(_parentElement, _data, _metaData, _countriesToCountries, _ev
   this.data = _data;
   this.metaData = _metaData;
   this.countriesToCountries = _countriesToCountries;
+  this.completeTable = _completeTable;
   this.eventHandler = _eventHandler;
   this.displayData = [];
 
-
-  this.selectableCountries = ["USA", "DEU", "JPN"];
+  this.selectableCountries = ["Americas",  "Africa",  "Asia",  "Europe",  "Oceania","USA", "DEU", "JPN", "VNM"];
 
   this.initVis();
 }
@@ -133,7 +133,6 @@ WorldMap.prototype.initVis = function(){
 
 // Setup Continent Filters
 
-
   d3.selectAll(".continent_filter").on("change", function() { 
     if (this.checked)
       that.map.zoomContinent(this.value);
@@ -143,11 +142,18 @@ WorldMap.prototype.initVis = function(){
  this.wrangleData(null);
 
   this.updateVis();
+
+  this.showAirlineRoutes("All Nippon Airways");
 }
 
 // level: default: city, alternative: country
 WorldMap.prototype.wrangleData= function(_filterFunction, level){
   this.displayData = this.filterAndAggregate(_filterFunction, level);
+}
+
+WorldMap.prototype.showAirlineRoutes = function(airline_name ) {
+  this.displayData = this.completeTable.filter(function(d) { return d.airline_name == airline_name; })
+  this.updateVis();
 }
 
 WorldMap.prototype.filterAndAggregate = function(_filter, level){

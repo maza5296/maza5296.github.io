@@ -9,7 +9,7 @@
 "Los Angeles","United States","Los Angeles Intl",-118.014,34.57,989,495,494,304,303,191,191,0,3892,14024
 "New York","United States","John F Kennedy Intl",-73.632,41.066,963,484,480,235,234,249,245,0,3680,12895
 "Frankfurt","Germany","Frankfurt Main",8.905,50.044,941,468,474,17,17,451,456,0,3881,11494
-"Houston","United States","George Bush Intl Houston",-94.903,30.64,901,449,453,294,297,155,155,0,2094,13035
+"Houston","United States","George Bush Houston",-94.903,30.64,901,449,453,294,297,155,155,0,2094,13035
 "Washington","United States","Washington Dulles Intl",-77.094,39.574,817,406,411,285,289,121,122,0,2575,11496
 "Newark","United States","Newark Liberty Intl",-73.615,41.154,789,395,395,183,182,212,212,0,3530,15259
 "Tokyo","Japan","Narita Intl",140.643,36.274,789,395,395,109,109,286,285,0,4173,11225
@@ -86,7 +86,7 @@
 "San Jose","Philippines","Juan Santamaria Intl",122.555,11.276,292,147,146,77,78,70,67,0,1554,8431
 "Buenos Aires","Argentina","Ministro Pistarini",-58.227,-34.704,290,143,148,53,53,90,94,0,3239,11789
 "Prague","Czech Republic","Ruzyne",14.433,50.168,290,145,146,2,2,143,143,0,1470,8211
-"Nairobi","Kenya","Jomo Kenyatta International",37.545,-0.866,283,145,139,22,22,123,116,0,2253,7204
+"Nairobi","Kenya","Jomo Kenyatta Intl",37.545,-0.866,283,145,139,22,22,123,116,0,2253,7204
 "Cancun","Mexico","Cancun Intl",-86.796,21.06,283,143,140,15,15,128,125,0,3221,10054
 "Cairo","Egypt","Cairo Intl",31.675,30.203,282,142,140,10,10,132,130,0,2529,8993
 "Qingdao","China","Liuting",120.624,36.443,282,141,142,118,118,23,23,0,973,2039
@@ -337,7 +337,6 @@
 "Kigali","Rwanda","Kigali Intl",30.232,-1.948,75,34,42,2,2,32,39,0,1563,6490
 "Alexandria","United States","Borg El Arab Intl",-92.25,31.545,75,37,38,8,8,29,30,0,1386,2590
 "Wellington","New Zealand","Wellington Intl",175.342,-40.879,74,37,38,25,25,12,12,0,1070,2595
-"Papeete","French Polynesia","Faa\\'a International",-149.353,-17.262,74,37,38,23,24,14,13,0,2452,9448
 "West Palm Beach","United States","Palm Beach Intl",-79.493,27.138,74,37,38,30,30,7,7,0,1346,2138
 "Goa","India","Goa",74.385,15.634,74,38,37,23,23,15,13,0,2175,7705
 "Dar Es Salaam","Tanzania","Mwalimu Julius K Nyerere Intl",39.337,-6.797,74,37,37,14,13,23,24,0,1545,7515

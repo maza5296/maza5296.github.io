@@ -5,6 +5,7 @@ LineChart = function(_parentElement, _data, _eventHandler){
   this.eventHandler = _eventHandler;
   this.displayData = [];
   this.color = d3.scale.category10()
+  this.countries = 5;
 
 
   this.margin = {top: 20, right: 20, bottom: 170, left: 60},
@@ -28,7 +29,7 @@ LineChart.prototype.initVis = function(){
   
   this.xAxis = d3.svg.axis()
     .scale(this.xScale)
-    .ticks(5)
+    .tickFormat(d3.format("d"))
     .orient("bottom");
 
   this.yAxis = d3.svg.axis()
@@ -48,61 +49,76 @@ LineChart.prototype.initVis = function(){
 }
 
 
-LineChart.prototype.wrangleData= function(_filterFunction){
-    var tmp = this.filterAndAggregate("Japan"); 
-    console.log(tmp);
+LineChart.prototype.wrangleData= function(_ranges){
+
+    var tmp = this.filterAndAggregate(_ranges); 
     var that = this;
 
-    this.displayData = tmp.map(function(d){
+    var res = tmp.map(function(d){
         return {
           name: d["name"],
           continent: d["continent"],
           data : [
               {
                 "year": "2005",
-                "value": d["data"]["Arrivals"]["2005"],
+                "value": parseInt(d["data"]["Arrivals"]["2005"].removeComma()),
               },{
                 "year": "2006",
-                "value": d["data"]["Arrivals"]["2006"],
+                "value": parseInt(d["data"]["Arrivals"]["2006"].removeComma()),
               },{
                 "year": "2007",
-                "value": d["data"]["Arrivals"]["2007"],
+                "value": parseInt(d["data"]["Arrivals"]["2007"].removeComma()),
               },{
                 "year": "2008",
-                "value": d["data"]["Arrivals"]["2008"],
+                "value": parseInt(d["data"]["Arrivals"]["2008"].removeComma()),
               },{
                 "year": "2009",
-                "value": d["data"]["Arrivals"]["2009"],
+                "value": parseInt(d["data"]["Arrivals"]["2009"].removeComma()),
               },{
                 "year": "2010",
-                "value": d["data"]["Arrivals"]["2010"],
+                "value": parseInt(d["data"]["Arrivals"]["2010"].removeComma()),
               },
           ]
         }
     });
-    console.log(that.displayData);
+    this.displayData = res.sort(function (a,b){
+        return d3.descending (parseInt(a["data"][5]["value"]), parseInt(b["data"][5]["value"]));
+    })
 }
 
-LineChart.prototype.filterAndAggregate = function(_filter){
+LineChart.prototype.filterAndAggregate = function(ranges){
 
-    var filter = _filter || function(){return false;}
-
-    var that = this;
-
-    var filteredData =  this.data.filter(function(d) {
-      return d["name"] == filter;
-    });
-    console.log(filteredData[0]["data"]["Arrivals"]);
-    return filteredData;
+    if(ranges == null) {
+      this.countries = 5;
+      return this.data;
+    } else if(ranges["level"] == "world") {
+      this.countries = 5;
+      return this.data;
+    } else if (ranges["level"] == "country") {
+      this.countries = 1;
+      return this.data.filter(function(d){
+        return d["name"] == ranges["subitemClicked"]["properties"]["name"];
+      });
+    } else if (ranges["level"] == "continent") {
+      this.countries = 5;
+      return this.data.filter(function(d){
+        return d["continent"] == ranges["subitemClicked"]["id"];
+      });
+    }
 }
 
 LineChart.prototype.updateVis = function(){
   var that = this;
-  debugger;
 
-  var max = d3.max(that.displayData[0]["data"], function(d){return d["value"]})
-  var min = d3.min(that.displayData[0]["data"], function(d){return d["value"]})
-  this.yScale.domain([parseInt(min), parseInt(max)])
+  this.svg.selectAll(".lines").remove();
+  this.svg.selectAll(".legend").remove();
+
+  var tmp = [];
+  for (i = 0; i < that.countries; i ++) {
+    tmp = tmp.concat(d3.extent(that.displayData[i]["data"], function(d){return parseInt(d["value"])}));
+  }
+
+  this.yScale.domain(d3.extent(tmp));
 
   this.svg.select(".x.axis")
         .call(this.xAxis)
@@ -110,23 +126,37 @@ LineChart.prototype.updateVis = function(){
   this.svg.select(".y.axis")
         .call(this.yAxis)
 
-  for (i = 0; i < 5; i++){
-
+  for (i = 0; i < that.countries; i++){
+    console.log(that.displayData[i]["data"])
     this.line = d3.svg.line()
     .x(function(d) { return that.xScale(parseInt(d["year"])); })
-    .y(function(d) { debugger; return that.yScale(parseInt(d["value"])); })
+    .y(function(d) { return that.yScale(parseInt(d["value"])); })
     .interpolate("monotone");;
-    console.log(that.displayData[0]["data"])
-    this.svg.append("path")
-    .attr('d', that.line(that.displayData[0]["data"]))
+    var path = this.svg.append("path")
+    .attr("class", "lines")
+    .attr('d', that.line(that.displayData[i]["data"]))
     .attr('stroke', that.color(i))
     .attr('stroke-width', 2)
     .attr('fill', 'none')
-    .text(that.displayData[0]["name"]);;
-  }
+    .attr("data-legend", that.displayData[i]["name"])    
+    
+    path.append("text")
+      .datum(function(d) { return {name: that.displayData[i]["name"], value: that.displayData[i]["data"][5]}; })
+      .attr("transform", function(d) { return "translate(" + that.xScale(parseInt(d["value"]["year"])) + "," + that.yScale(parseInt(d["value"]["value"])) + ")"; })
+      .attr("x", 3)
+      .attr("dy", ".35em")
+      .text(function(d) { return d.name; });
+  };
 
+  legend = this.svg.append("g")
+    .attr("class","legend")
+    .attr("transform","translate(25,290)")
+    .style("font-size","12px")
+    .call(d3.legend)
 }
 
 
-LineChart.prototype.onSelectionChange= function (ranges){
+LineChart.prototype.onSelectionChange= function (_ranges){
+  this.wrangleData(_ranges);
+  this.updateVis();
 }
