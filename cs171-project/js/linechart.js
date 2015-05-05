@@ -6,12 +6,13 @@ LineChart = function(_parentElement, _data, _eventHandler){
   this.displayData = [];
   this.color = d3.scale.category10()
   this.countries = 5;
+  this.title = "Top arrivals of non-resident passengers";
+  this.selection;
 
 
-  this.margin = {top: 20, right: 20, bottom: 170, left: 60},
-  this.width =  650 - this.margin.left - this.margin.right,
-  this.height = 440 - this.margin.top - this.margin.bottom;
-  console.log(_data);
+  this.margin = {top: 20, right: 20, bottom: 150, left: 60},
+  this.width =  500 - this.margin.left - this.margin.right,
+  this.height = 380 - this.margin.top - this.margin.bottom;
   this.initVis();
 }
 
@@ -90,17 +91,21 @@ LineChart.prototype.filterAndAggregate = function(ranges){
 
     if(ranges == null) {
       this.countries = 5;
+      this.selection = "(Wordwide)";
       return this.data;
     } else if(ranges["level"] == "world") {
       this.countries = 5;
+      this.selection = "(Wordwide)";
       return this.data;
     } else if (ranges["level"] == "country") {
       this.countries = 1;
+      this.selection = "(" + ranges["subitemClicked"]["properties"]["name"] + ")";
       return this.data.filter(function(d){
         return d["name"] == ranges["subitemClicked"]["properties"]["name"];
       });
     } else if (ranges["level"] == "continent") {
       this.countries = 5;
+      this.selection = "(" + ranges["subitemClicked"]["id"] + ")";
       return this.data.filter(function(d){
         return d["continent"] == ranges["subitemClicked"]["id"];
       });
@@ -109,6 +114,8 @@ LineChart.prototype.filterAndAggregate = function(ranges){
 
 LineChart.prototype.updateVis = function(){
   var that = this;
+
+  this.titleElement = d3.select("#lineheading").text("" + this.title + " " + this.selection);
 
   this.svg.selectAll(".lines").remove();
   this.svg.selectAll(".legend").remove();
@@ -122,12 +129,24 @@ LineChart.prototype.updateVis = function(){
 
   this.svg.select(".x.axis")
         .call(this.xAxis)
+        .append("text")
+        .attr("x",210)
+        .attr("dy", "28")
+        .style("text-anchor", "end")
+        .text("Years");
 
   this.svg.select(".y.axis")
         .call(this.yAxis)
+        .append("text")
+        .attr("x",-5)
+        .attr("dy", "-45")
+        .attr("transform", function(d) {
+                return "rotate(-90)" 
+                })
+        .style("text-anchor", "end")
+        .text("Arrival passenger numbers (thousands)");
 
   for (i = 0; i < that.countries; i++){
-    console.log(that.displayData[i]["data"])
     this.line = d3.svg.line()
     .x(function(d) { return that.xScale(parseInt(d["year"])); })
     .y(function(d) { return that.yScale(parseInt(d["value"])); })
@@ -150,9 +169,9 @@ LineChart.prototype.updateVis = function(){
 
   legend = this.svg.append("g")
     .attr("class","legend")
-    .attr("transform","translate(25,290)")
+    .attr("transform","translate(30,15)")
     .style("font-size","12px")
-    .call(d3.legend)
+    .call(d3.verticallegend)
 }
 
 

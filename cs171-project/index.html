@@ -5,51 +5,98 @@
     <title>Flight Data</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/myStyle.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="libs/bootstrap/js/bootstrap.min.js"></script>
     <!--pic source: http://pichost.me/1684227/-->
 </head>
+<style>
+html {
+    height: 100%;
+    margin: 0, 0, 0, 0;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-image: url(img/jumbotron.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    font-family: 
+}
+
+#landing {
+}
+
+#title {
+    margin-top: 8%;
+    width: 100%;
+    text-align: center;
+}
+
+#description {
+    text-align: center;
+    margin-top: 5%;
+}
+
+h1 {
+    /*font-family: Baskerville;*/
+    text-align: center;
+    font-size: 100px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: #fff;
+}
+
+h2 {
+/*    font-family: Baskerville;*/
+    font-size: 30px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 17px;
+    color: #fff;
+}
+#button{
+    border-style: solid;
+    border-color: white;
+    border-radius: 5px;
+    position: absolute;
+    left:50%;
+    transform: translate(-50%, 0);
+    vertical-align: middle;
+    padding: 0px 15px 8px 15px;
+}
+#button:hover {
+    opacity: 0.5;
+}
+
+</style>
 
 <body>
-<div class="container">
-    <!-- row 1: navigation -->
-    <div class="row">
-    	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="glyphicon glyphicon-arrow-down"></span>
-                  MENU
-                </button>
-            </div>
-            <div class="collapse navbar-collapse" id="collapse">
-                <div class="container">
-                    <h2 id="name" class="nav navbar-nav navbar-left"><a href="index.html">Flight Data</a></h2>
-                <ul class="nav navbar-nav navbar-right links">
-                    <li class="active"><a href="about.html">Home Page</a></li>
-                    <li><a href="flight.html">Visualization</a></li>
-                    <li><a href="#">Process Book</a></li>
-                </ul> 
-                </div>
-            </div>
-
-         </nav> 
+<div id="landing">
+    <div id="title" style="display:none;">
+        <h1>Flight Visualization</h1>
+    </div>
+    <div id="description">
+        <h2 id="names" style="display:none;">Zeno Ziemke, Masahiro Kusunoki, Ngu Nguyen</h2><br>
+        <a href="flight.html"><div id="button"  style="display:none;">
+            <h2>Fly Awayyyy</h2>
+        </div></a>
     </div>
 </div>
-    <div class="jumbotron">
-      <div class="intro">
-        <h1 style="font-size: 100px;">Flight Data</h1> 
-        <h2>Zeno Ziemke, Masahiro Kusunoki, Nhu Nguyen</h2> 
-        <h2>CS171: Visualization </h2>
-        <a href="flight.html" class="btn btn-default btn-lg">
-          <span class="network-name">Fly awayyy</span>
-        </a>
-      </div>
-    </div>
-
-
-<!-- javascript -->
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
 </body>
+<script>
+$(document).ready(function(){
+    console.log("test");
+    $('#title').fadeIn(1000);
+    $("#names").delay(800).fadeIn(1000);
+    $("#button").delay(1800).fadeIn(1000);
+});
+</script>
 </html>

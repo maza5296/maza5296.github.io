@@ -6,7 +6,7 @@ cd data/custom_maps/ne_10m_admin_1_states_provinces
 ogr2ogr -f GeoJSON -where "ADM0_A3 IN ('VNM')" VNM.json ne_10m_admin_1_states_provinces.shp
 
 
-topojson --id-property adm1_code -p name=NAME -p name -o VNM.topo.json VNM.json
+topojson --id-property adm1_code -p name=NAME -p name -o CHN.topo.json CHN.json
 
 
 insert into datamaps.all.js, make country code lower case
@@ -21,10 +21,8 @@ Click Route Visualiation title to get projection values and add to projection pa
 Repeat last step if necessary
 
 
-<<<<<<< HEAD
-=======
 
-topojson --id-property adm1_code -p name=NAME -p name -o VNM.topo.json VNM.json
+topojson --id-property adm1_code -p name=NAME -p name -o CHN.topo.json CHN.json
 
 
 

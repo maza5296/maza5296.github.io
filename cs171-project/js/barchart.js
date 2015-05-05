@@ -47,7 +47,8 @@ BarChart = function(_parentElement, _data, _eventHandler){
 
     "Australia": "AU",
     "New Zealand": "NZ",
-    "Fiji": "FJ"
+    "Fiji": "FJ",
+    "South Korea": "KR"
 
 
 
@@ -64,30 +65,31 @@ BarChart.prototype.initVis = function(){
   var that = this; 
 
   var margin = {
-      top: 10,
-      right: 120,
-      bottom: 10,
-      left: 120*1.4
+      top: 5,
+      right: 55,
+      bottom: 15,
+      left: 120*1.4+8
   };
 
   this.margin = margin;
-  this.width = width = 360 - margin.left - margin.right;
-  this.height = height = 200 - margin.top - margin.bottom;
+  this.width = width = 500 - margin.left - margin.right;
+  this.height = height = 150 - margin.top - margin.bottom;
 
+   this.titleElement = d3.select("#barchart2").insert("h2")
+    .attr("class", "heading")
+    .attr("transform", "translate(" + -margin.left + ",0)");
+  
 
 
   this.svg = this.parentElement.append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom + 30)
+      .attr("class","barchart")
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+  this.onSelectionChange({level:"world"}, true);
 
- this.titleElement = this.svg.insert("text", ":first-child")
-    .attr("class", "title")
-    .attr("transform", "translate(" + -margin.left + ",0)");
-  
-    this.onSelectionChange({level:"world"}, true);
 
 }
 
@@ -120,7 +122,7 @@ BarChart.prototype.filterAndAggregate = function(_filter, _value){
     return _filter(d);
   })
   .sort(function(a,b) {return _value(b)-_value(a); })
-  .slice(0,10)
+  .slice(0,5)
 
 }
 
@@ -143,7 +145,7 @@ BarChart.prototype.updateVis = function(init){
 
       this.xScale.domain([this.min, this.max]);
       
-      this.bar_height = 10 
+      this.bar_height = 15 
       
       groups = this.svg.selectAll("g").data(this.displayData);    
       
@@ -165,6 +167,7 @@ BarChart.prototype.updateVis = function(init){
           .attr("dy", ".8em")
         .attr("text-anchor", "end")
         .attr("class", "labels")
+        .style("font-size", 15)
           
       values =  groups_new.append("text")
         .attr("y", 0)
@@ -180,7 +183,7 @@ BarChart.prototype.updateVis = function(init){
       //Update all
       groups
       .attr("transform",  function(d, i) {
-        return "translate("+that.xScale(that.min)+","+((that.bar_height + 5) * i+that.offset)+")";
+        return "translate("+that.xScale(that.min)+","+((that.bar_height + 10) * i+that.offset)+")";
        });
  
       groups.select("rect")
@@ -194,11 +197,11 @@ BarChart.prototype.updateVis = function(init){
         .text(function(d) { return d.label; });    
           
       groups.select("text.values")
-        .attr("x", function(d) { return that.xScale(d[selectedColumn]) + 6; })
+        .attr("x", function(d) { return that.xScale(d[selectedColumn]) + 11; })
         .text(function(d) { return d3.format(",")(d[selectedColumn]); }); 
 
 
-         this.svg.selectAll(".legend").remove();
+      this.svg.selectAll(".legend").remove();
 
        legend = this.svg.append("g")
       .attr("class","legend")
@@ -231,7 +234,7 @@ BarChart.prototype.onSelectionChange= function (args, init){
       function(d) { return true; }, 
       function(d) { return d.number_of_routes; },
       function(d) { return d.most_active_airport.name + " (" + that.country_codes[d.country] + ")"; },
-      "Top 10 airports by number of routes (Worldwide)"
+      "Top 5 airports by number of routes (Worldwide)"
     );
   
     this.updateVis();
@@ -242,7 +245,7 @@ BarChart.prototype.onSelectionChange= function (args, init){
       function(d) { return d.country ==  country}, 
       function(d) { return d.number_of_routes; },
       function(d) { return d.most_active_airport.name;},
-      "Top 10 airports by number of routes ("  + country + ")"
+      "Top 5 airports by number of routes ("  + country + ")"
     );
 
     this.updateVis();
@@ -253,7 +256,7 @@ BarChart.prototype.onSelectionChange= function (args, init){
       function(d) { return d.continent ==  continent}, 
       function(d) { return d.number_of_routes; },
       function(d) { return d.most_active_airport.name + " (" + that.country_codes[d.country] + ")"; },
-      "Top 10 airports by number of routes ("  + continent + ")"
+      "Top 5 airports by number of routes ("  + continent + ")"
     );
   
     this.updateVis();

@@ -8,6 +8,7 @@
     <script src="libs/d3/d3.min.js" charset="utf-8"></script>
     <script src="libs/d3/d3.svg.multibrush.js" charset="utf-8"></script>
     <script src="libs/d3/d3.legend.js" charset="utf-8"></script>
+    <script src="libs/d3/d3.verticallegend.js" charset="utf-8"></script>
     <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
     <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
     <script src="http://d3js.org/queue.v1.min.js" charset="utf-8"></script>
@@ -16,7 +17,6 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
     <script src="libs/datamaps/datamaps.all.js"></script>
-
 
     <!--Stylesheets-->
     <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
@@ -35,71 +35,107 @@
 
 </head>
 <body>
-<div class="container">
+
+<svg id="heatmap_legend"></svg>
+<div class="container" >
     <!-- row 1: navigation -->
-    <div class="row">
-        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="glyphicon glyphicon-arrow-down"></span>
-                  MENU
-                </button>
+    <header class="nav">
+        <nav id="menu-bar">
+            <div class="nav-title">
+                <a class ="nav-name" href="flight.html">Flight Visualization</a>
             </div>
-            <div class="collapse navbar-collapse" id="collapse">
-                <div class="container">
-                    <h2 id="name" class="nav navbar-nav navbar-left"><a href="index.html">Flight Data</a></h2>
-                <ul class="nav navbar-nav navbar-right links">
-                    <li class="active"><a href="about.html">Home Page</a></li>
-                    <li><a href="flight.html">Visualization</a></li>
-                    <li><a href="#">Process Book</a></li>
-                </ul> 
-                </div>
+            <div class ="nav-links1">
+                <a class ="nav-name" href="http://youtube.com">Demo Video</a>
             </div>
-         </nav> 
-    </div>
+            <div class ="nav-links2">
+                <a class ="nav-name" href="#">Process Book</a>
+            </div>
+        </nav>
+    </header>
 </div>
     
-    <div class="container">   
-        <div id="title"></div>
+<div class="container">   
+    <div id="title"></div>
 
-        <div class="row">
-            <div class="col-md-8 col-sm-12">
-               <p></p>
-            </div>
-
-        </div>
-        <div class="row">
-           
-        </div>
-        <div class="row" style="width:1800px;">
-             <h3 class="heading" id="routevis"> Route Visualization </h3>
-             <div id="filter_table" style="margin-left:40px;">Filter by: 
-                <label><input type="radio" class="continent_filter" name="Americas" value="Americas" title="Americas">Americas</input></label>
-                <label><input type="radio" class="continent_filter" name="Africa" value="Africa" title="Africa" >Africa</input></label>
-                <label><input type="radio" class="continent_filter" name="Asia" value="Asia" title="Asia">Asia</input></label>
-                <label><input type="radio" class="continent_filter" name="Europe" value="Europe" title="Europe" >Europe</input></label>
-                <label><input type="radio" class="continent_filter" name="Oceania" value="Oceania" title="Oceania" >Oceania</input></label>
-            </div>
-            <div id="worldmap" class="col-md-7"></div>
-            <div id="linechart" class="col-md-6">
-                <h3 class="heading"> Passenger Numbers </h3>
-                <svg class="line" width="650" height="330"></svg>
-            </div>
-            
-            <div id="barchart2" class="col-md-3">
-                <h3 class="heading"> Top 10 Flight Destination (Worldwide) </h3>
-            </div>
+    <div class="row">
+        <div class="col-md-8 col-sm-12">
+           <p></p>
         </div>
 
-        <div class="row bottom">
-        <div id="table">
-                <h3 class="heading" > Airline Ranking </h3>
-            </div>
-            
-            
-        </div>
     </div>
+    <div class="row">
+       
+    </div>
+    <div class="row">
+         <h2 class="heading" id="routevis"> Route Visualization </h2>
+        <div id="worldmap" class="col-md-5">
+             <div class="btn-group" role="group" aria-label="..." id="filter_table">
+              <button type="button" class="btn btn-default continent_filter" name="Americas">Americas</button>
+              <button type="button" class="btn btn-default continent_filter" name="Africa">Africa</button>
+              <button type="button" class="btn btn-default continent_filter" name="Asia">Asia</button>
+              <button type="button" class="btn btn-default continent_filter" name="Europe">Europe</button>
+              <button type="button" class="btn btn-default continent_filter" name="Oceania">Oceania</button>
+            </div>
+        </div>
+        <div id="linechart" class="col-md-3">
+            <h2 id="lineheading" class="heading"></h2>
+            <svg class="line" width="500" height="270"></svg>
+        </div>
+        
+        <div id="barchart2" class="col-md-3"></div>
+    </div>
+
+    <div class="row bottom" style="width:1500px;">
+        <div id="table" class="col-md-5">
+                <h2 class="heading" > Airline Ranking </h2>
+        </div>
+        <!--start accordion-->
+         <div class="panel-group col-md-4" id="accordion">
+         <h2 class="heading storyheading">Stories</h2>
+         <div class="storypanel">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4  id="story1-title" class="panel-title">
+                    <a href="#story1" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-plane"></span> East vs West, in the East</a>
+              </h4>
+            </div>
+                <div id="story1" class="panel-collapse collapse">
+              <div class="panel-body">
+                <p>"East vs West" seems to be a paradox occuring not only on the global scale, but also even more locally within the China. It has been recently reported that the gap between China’s rich and poor is now one of the world’s highest, surpassing even that in the U.S. This visualization enables us to also understand the scale of geographic inequalities between the cities, in which the urban east is far better connected than the rural west.</p>
+              </div>
+            </div>
+          </div>     
+               
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 id="story2-title" class="panel-title">
+                <a href="#story2" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-plane"></span> United, United</a>
+              </h4>
+            </div>
+            <div id="story2" class="panel-collapse collapse">
+              <div class="panel-body">
+                <p>In 2012, United Airlines merged with Continental Airlines to surpass Delta in becoming the world largest carrier. Prior to the merger, United offered a hub at Narita Airport, Tokyo, to serve non-stop flights from Tokyo to such locations as Seattle, Chicago, Honolulu, Hong Kong and Seoul, South Korea. Continental, on the other hand, has an airport hub at Guam International Airport. Both of these are visible under the United Airline name on the world map.</p>
+               </div>
+            </div>
+          </div>     
+               
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 id="story3-title" class="panel-title">
+                <a href="#story3" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"> <span class="glyphicon glyphicon-plane"></span> The Final Frontier</a>
+              </h4>
+            </div>
+            <div id="story3" class="panel-collapse collapse">
+              <div class="panel-body">
+                <p>Story 3</p>
+              </div>
+            </div>
+          </div>       
+        </div><!-- end accordion --> 
+    </div>
+
+
+</div>
 
 
 
@@ -110,6 +146,7 @@
             var citiesToCities = [];
             var metaDataCities = {};
             var completeTable = [];
+            var completeData = [];
             var airlineRouteCounts = [];
             var domesticCitiyConnectionsCountByCountry = [];
             var countriesToCountries = [];
@@ -123,42 +160,63 @@
                 
              
                 var barchart2 = new BarChart(d3.select("#barchart2"), metaDataCities, MyEventHandler);  
-                 var table = new Table(d3.select("table"), airlineRouteCounts, MyEventHandler);
+                var table = new Table(d3.select("table"), completeData, MyEventHandler);
 
-                var worldmap = new WorldMap(d3.select("#worldmap"), citiesToCities, metaDataCities, countriesToCountries, completeTable, MyEventHandler);
+                var worldmap = new WorldMap(d3.select("#worldmap"), citiesToCities, metaDataCities, countriesToCountries, completeTable, UNData, MyEventHandler);
                 var linechart = new LineChart(d3.select("#linechart"), UNData, MyEventHandler);
                 
                 $(MyEventHandler).bind("selectionChanged", function(event, args){
-                    console.log(args);
+                    console.log(args)
                     barchart2.onSelectionChange(args);
                     linechart.onSelectionChange(args);
+                    table.onSelectionChange(args);
+                    worldmap.onSelectionChange(args);
+
+                    worldmap.args = args;
         
                   });
 
                 //  Link airline ranking with map
                 $("#table").on("click","tr.row", function() {
-                    debugger;
                     worldmap.showAirlineRoutes(d3.select(this.children[0]).text())
-                })  
+                });
+
+                $("#story1-title").on("click", function(){
+                    worldmap.zoomCountry("CHN");
+                });
+
+                $("#story2-title").on("click", function(){
+                    worldmap.showAirlineRoutes("United Airlines")
+                });
+
+                $("#story3-title").on("click", function(){
+                    worldmap.map.zoomContinent("Asia");
+                });
 
             }
 
             var dataLoaded = function (error, _citiesToCities, _metaDataCities, _completeTable, _airlineRouteCounts, _countriesToCountries, _countryList, _UNData) {
 
                 if (!error) {
+                        countryList = {};
+                    _countryList.map(function(d){
+                        countryList[d["name"]] = d["continent"];
+                    });
 
                     citiesToCities = _citiesToCities;
 
-                     completeTable = _completeTable.map(function (d) {
+                    completeTable = _completeTable.map(function (d) {
             
                             return {
                                 origin: {
                                     country: d["departure country"],
+                                    continent: (countryList[d["departure country"].toTitleCase()]) ? countryList[d["departure country"].toTitleCase()] : "Unknown",
                                     longitude: parseFloat(d["long. departure (decimal)"]),
                                     latitude: parseFloat(d["lat. departure (decimal)"]),
                                 },
                                 destination: {
                                    country: d["arrival country"],
+                                   continent: (countryList[d["arrival country"].toTitleCase()]) ? countryList[d["arrival country"].toTitleCase()] : "Unknown",
                                     longitude: parseFloat(d["long. arrival (decimal)"]),
                                     latitude: parseFloat(d["lat. arrival (decimal)"]),
                                 },
@@ -184,11 +242,13 @@
                             return {
                                 origin: {
                                     country: d["country departure"],
+                                    continent: (countryList[d["country departure"].toTitleCase()]) ? countryList[d["country departure"].toTitleCase()] : "Unknown",
                                     longitude: parseFloat(d["departure longitude"]),
                                     latitude: parseFloat(d["departure latitude"]),
                                 },
                                 destination: {
                                     country: d["country arrival"],
+                                    continent: (countryList[d["country arrival"].toTitleCase()]) ? countryList[d["country arrival"].toTitleCase()] : "Unknown",
                                     longitude: parseFloat(d["arrival longitude"]),
                                     latitude: parseFloat(d["arrival latitude"]),
                                 },
@@ -198,10 +258,7 @@
                         });
 
 
-                    countryList = {};
-                    _countryList.map(function(d){
-                        countryList[d["name"]] = d["continent"];
-                    });
+                
 
                     UNData = Object.keys(_UNData).map(function(d){
                         return {
@@ -218,6 +275,33 @@
                     //         console.log(d);
                     //     }
                     // })
+
+                    //DATA FOR THE TABLE
+                    var i = 0
+                    prev = ""
+
+                    _completeTable.forEach(function(d){
+                        if (completeData.length == 0 || prev != d["airline name"])
+                        {
+                            var res = {};
+                            res.count = 0
+                            res.airline = d["airline name"]
+                            res.country = d["airline country"]
+                            res.continent = d["airline continent"]
+                            prev = d["airline name"]
+                            _completeTable.forEach(function(e){
+                                if (e["airline name"] == res.airline)
+                                {
+                                    res.count++;
+                                }
+                            })
+                            completeData[i] = res;
+                            i++;
+                        }
+                    })
+
+
+                    //END DATA FOR TABLE
 
                 
                     metaDataCities = _metaDataCities.map(function (d) {
@@ -253,10 +337,7 @@
                 }
             }
 			
-			
 			// HELPERS 
-
-
             var dateFormat = d3.time.format("%Y-%m-%d");
 
             var startHere = function(){
@@ -264,7 +345,7 @@
             	queue()
                 .defer(d3.json, 'data/openflight_db/citiesToCities_noduplicates.json')
                 .defer(d3.csv, 'data/openflight_db/citiesTable.csv')
-                .defer(d3.csv, 'data/openflight_db/completeTable.csv')  
+                .defer(d3.csv, 'data/openflight_db/completeTable-rmcont.csv')  
                 .defer(d3.json, 'data/openflight_db/airlineRoutesCounts.json')  
                 .defer(d3.csv, 'data/openflight_db/countriesToCountries.csv') 
                 .defer(d3.csv, 'data/countrylist.csv')
