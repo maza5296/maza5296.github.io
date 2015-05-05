@@ -90,11 +90,20 @@ margin-left: 40px;
   margin-left: 20px;
 }
 
-.line, .barchart, .contain, .storypanel{
+ .barchart, .contain, .storypanel{
 border-style: solid black;
 border-width: 1px;
 border-radius: 5px;
 box-shadow: 0 0 5px 2px rgba(0,0,0,.35);
+}
+
+.linechart {
+  border-style: solid black;
+border-width: 1px;
+border-radius: 5px;
+box-shadow: 0 0 5px 2px rgba(0,0,0,.35);
+width: 500px;
+height: 270px;
 }
 
 .contain{
@@ -111,7 +120,7 @@ box-shadow: 0 0 5px 2px rgba(0,0,0,.35);
 }
 
 #linechart{
-    margin-top: -20px;
+    margin-top: 20px;
     margin-left: 20px;
     margin-right: 10px;
     

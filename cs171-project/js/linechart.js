@@ -21,7 +21,8 @@ LineChart.prototype.initVis = function(){
 
   var that = this; 
 
-  this.svg = this.parentElement.select("svg")
+  this.svg = this.parentElement.append("svg")
+        .attr("class","linechart")
         .append("g")
         .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
 

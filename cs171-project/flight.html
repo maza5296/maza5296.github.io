@@ -79,7 +79,6 @@
         </div>
         <div id="linechart" class="col-md-3">
             <h2 id="lineheading" class="heading"></h2>
-            <svg class="line" width="500" height="270"></svg>
         </div>
         
         <div id="barchart2" class="col-md-3"></div>
@@ -93,19 +92,7 @@
          <div class="panel-group col-md-4" id="accordion">
          <h2 class="heading storyheading">Stories</h2>
          <div class="storypanel">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4  id="story1-title" class="panel-title">
-                    <a href="#story1" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-plane"></span> East vs West, in the East</a>
-              </h4>
-            </div>
-                <div id="story1" class="panel-collapse collapse">
-              <div class="panel-body">
-                <p>"East vs West" seems to be a paradox occuring not only on the global scale, but also even more locally within the China. It has been recently reported that the gap between China’s rich and poor is now one of the world’s highest, surpassing even that in the U.S. This visualization enables us to also understand the scale of geographic inequalities between the cities, in which the urban east is far better connected than the rural west.</p>
-              </div>
-            </div>
-          </div>     
-               
+          
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 id="story2-title" class="panel-title">
@@ -117,8 +104,18 @@
                 <p>In 2012, United Airlines merged with Continental Airlines to surpass Delta in becoming the world largest carrier. Prior to the merger, United offered a hub at Narita Airport, Tokyo, to serve non-stop flights from Tokyo to such locations as Seattle, Chicago, Honolulu, Hong Kong and Seoul, South Korea. Continental, on the other hand, has an airport hub at Guam International Airport. Both of these are visible under the United Airline name on the world map.</p>
                </div>
             </div>
+          </div>  
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4  id="story1-title" class="panel-title"><a href="#story1" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-plane"></span> East vs West, in the East</a></h4>
+            </div>
+            <div id="story1" class="panel-collapse collapse">
+              <div class="panel-body">
+                <p>"East vs West" seems to be a paradox occuring not only on the global scale, but also even more locally within the China. It has been recently reported that the gap between China’s rich and poor is now one of the world’s highest, surpassing even that in the U.S. This visualization enables us to also understand the scale of geographic inequalities between the cities, in which the urban east is far better connected than the rural west.</p>
+              </div>
+            </div>
           </div>     
-               
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 id="story3-title" class="panel-title">
@@ -127,7 +124,7 @@
             </div>
             <div id="story3" class="panel-collapse collapse">
               <div class="panel-body">
-                <p>Story 3</p>
+                <p>Africa is home to the world's fastest-growing population; there are already 500 million mobile phones in Africa, with 850 million expected by 2015; Africa's workforce is expected to be the world's largest by 2035, bigger than both China's and India's; consumer spending is growing in Africa from around $900bn today to an anticipated $1.4 trillion by 2020. However, currently it lags far behind other more developed continents in terms of flight routes served or expenditure of foreign visitors in their country.</p>
               </div>
             </div>
           </div>       
@@ -186,11 +183,11 @@
                 });
 
                 $("#story2-title").on("click", function(){
-                    worldmap.showAirlineRoutes("United Airlines")
+                    worldmap.showAirlineRoutes("United Airlines");
                 });
 
                 $("#story3-title").on("click", function(){
-                    worldmap.map.zoomContinent("Asia");
+                    worldmap.map.zoomContinent("Africa");
                 });
 
             }
