@@ -110,11 +110,17 @@ LineChart.prototype.filterAndAggregate = function(ranges){
         return d["continent"] == ranges["subitemClicked"]["id"];
       });
     } else if (ranges == "story") {
-      console.log("check3");
       this.selection = "(Global Financial Crisis)";
       this.countries = 3;
       return this.data.filter(function(d){  
         return d["name"] == "United States" || d["name"] == "China" || d["name"] == "Spain"
+      });
+    }
+    else if (ranges == "story1") {
+      this.selection = "(Israel)";
+      this.countries = 1;
+      return this.data.filter(function(d){  
+        return d["name"] == "Israel"
       });
     }
 }

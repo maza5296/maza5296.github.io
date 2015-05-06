@@ -46,10 +46,10 @@
                 <a class ="nav-name" href="flight.html">Flight Visualization</a>
             </div>
             <div class ="nav-links1">
-                <a class ="nav-name" href="http://youtube.com">Demo Video</a>
+                <a class ="nav-name" href="https://www.youtube.com/watch?v=ajYWUTMBjZY&feature=youtu.be" target="_blank">Demo Video</a>
             </div>
             <div class ="nav-links2">
-                <a class ="nav-name" href="#">Process Book</a>
+                <a class ="nav-name" href="http://maza5296.github.io/cs171-project/documentation/ProcessBook.pdf" target="_blank">Process Book</a>
             </div>
         </nav>
     </header>
@@ -97,11 +97,11 @@
 
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4  id="story1-title" class="panel-title"><a href="#story1" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-plane"></span> East vs West, in the East</a></h4>
+              <h4  id="story1-title" class="panel-title"><a href="#story1" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-plane"></span> "East vs West", in the East</a></h4>
             </div>
             <div id="story1" class="panel-collapse collapse">
               <div class="panel-body">
-                <p>"East vs West" seems to be a paradox occuring not only on the global scale, but also even more locally within the China. It has been recently reported that the gap between China’s rich and poor is now one of the world’s highest, surpassing even that in the U.S. This visualization enables us to also understand the scale of geographic inequalities between the cities, in which the urban east is far better connected than the rural west.</p>
+                <p>"East vs West" seems to be a paradox occurring not only on the global scale, but also even more locally within the China. It has been recently reported that the gap between China’s rich and poor is now one of the world’s highest, surpassing even that in the U.S. This visualization enables us to also understand the scale of geographic inequalities between the cities, in which the urban east is far better connected than the rural west.</p>
               </div>
             </div>
           </div>     
@@ -206,10 +206,12 @@
                 });
 
                 $("#story1-title").on("click", function(){
+                    // $("html, body").animate({ scrollTop: 0 }, "slow");
                     worldmap.zoomCountry("CHN");
                 });
 
                 $("#story2-title").on("click", function(){
+                    // $("html, body").animate({ scrollTop: 0 }, "slow");
                     if (!worldmap.args || worldmap.args.level == "world") {
                         worldmap.showAirlineRoutes("United Airlines");
                     }
@@ -222,6 +224,7 @@
                 });
 
                 $("#story3-title").on("click", function(){
+                    // $("html, body").animate({ scrollTop: 0 }, "slow");
                     // africa connections with other continents
                     // if (!worldmap.args || worldmap.args.level == "world") {
                     //     setTimeout(function(){
@@ -255,6 +258,7 @@
                 });
 
                 $("#story4-title").on("click", function(){
+                    // $("html, body").animate({ scrollTop: 0 }, "slow");
                     if (!worldmap.args || worldmap.args.level == "world") {
                         linechart.wrangleData("story");
                         linechart.updateVis();
@@ -269,10 +273,13 @@
                 });
 
                 $("#story5-title").on("click", function(){
+                    // $("html, body").animate({ scrollTop: 0 }, "slow");
                     function israelVis() {
                         worldmap.wrangleData(function(d){ 
                             return (d.origin.country == "Israel" || d.destination.country == "Israel")}, "country");
                         worldmap.updateVis();
+                        linechart.wrangleData("story1");
+                        linechart.updateVis();
                     }
                     if (!worldmap.args || worldmap.args.level == "world") {
                         israelVis();
