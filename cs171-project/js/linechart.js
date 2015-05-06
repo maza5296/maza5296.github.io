@@ -52,7 +52,6 @@ LineChart.prototype.initVis = function(){
 
 
 LineChart.prototype.wrangleData= function(_ranges){
-
     var tmp = this.filterAndAggregate(_ranges); 
     var that = this;
 
@@ -109,6 +108,13 @@ LineChart.prototype.filterAndAggregate = function(ranges){
       this.selection = "(" + ranges["subitemClicked"]["id"] + ")";
       return this.data.filter(function(d){
         return d["continent"] == ranges["subitemClicked"]["id"];
+      });
+    } else if (ranges == "story") {
+      console.log("check3");
+      this.selection = "(Global Financial Crisis)";
+      this.countries = 3;
+      return this.data.filter(function(d){  
+        return d["name"] == "United States" || d["name"] == "China" || d["name"] == "Spain"
       });
     }
 }

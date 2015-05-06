@@ -32,6 +32,7 @@
 
     <!-- add own stylesheet-->
     <link rel="stylesheet" type="text/css" href="css/myStyle.css">
+    <link rel="icon" type="image/png" href="/img/favicon.png"/>
 
 </head>
 <body>
@@ -93,18 +94,6 @@
          <h2 class="heading storyheading">Stories</h2>
          <div class="storypanel">
           
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 id="story2-title" class="panel-title">
-                <a href="#story2" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-plane"></span> United, United</a>
-              </h4>
-            </div>
-            <div id="story2" class="panel-collapse collapse">
-              <div class="panel-body">
-                <p>In 2012, United Airlines merged with Continental Airlines to surpass Delta in becoming the world largest carrier. Prior to the merger, United offered a hub at Narita Airport, Tokyo, to serve non-stop flights from Tokyo to such locations as Seattle, Chicago, Honolulu, Hong Kong and Seoul, South Korea. Continental, on the other hand, has an airport hub at Guam International Airport. Both of these are visible under the United Airline name on the world map.</p>
-               </div>
-            </div>
-          </div>  
 
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -124,10 +113,48 @@
             </div>
             <div id="story3" class="panel-collapse collapse">
               <div class="panel-body">
-                <p>Africa is home to the world's fastest-growing population; there are already 500 million mobile phones in Africa, with 850 million expected by 2015; Africa's workforce is expected to be the world's largest by 2035, bigger than both China's and India's; consumer spending is growing in Africa from around $900bn today to an anticipated $1.4 trillion by 2020. However, currently it lags far behind other more developed continents in terms of flight routes served or expenditure of foreign visitors in their country.</p>
+                <p>Africa is home to the world's fastest-growing population; Africa's workforce is expected to be the world's largest by 2035, bigger than both China's and India's; consumer spending is growing in Africa from around $900bn today to an anticipated $1.4 trillion by 2020. However, currently it lags far behind other more developed continents in terms of flight routes served or expenditure of foreign visitors in their country.</p>
               </div>
             </div>
-          </div>       
+          </div>  
+           <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 id="story2-title" class="panel-title">
+                <a href="#story2" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-plane"></span> United, United</a>
+              </h4>
+            </div>
+            <div id="story2" class="panel-collapse collapse">
+              <div class="panel-body">
+                <p>In 2012, United Airlines merged with Continental Airlines to surpass Delta in becoming the world largest carrier. Prior to the merger, United offered a hub at Narita Airport, Tokyo, to serve non-stop flights from Tokyo, while Continental, on the other hand, has an airport hub at Guam International Airport. Both of these are visible under the United Airline name on the world map.</p>
+               </div>
+            </div>
+          </div>   
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 id="story5-title" class="panel-title">
+                <a href="#story5" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-plane"></span> Israeli Isolation</a>
+              </h4>
+            </div>
+            <div id="story5" class="panel-collapse collapse">
+              <div class="panel-body">
+                <p>This visualization shows there are extremely few flights that connect Israel with nearby Arab countries. For the majority of the other countries, the flight connections are very frequent in their neighbors; clearly Israel seems to be an exception to the rule. This data can speak directly to the political relationships between the countries in the Arab world; an extremely interesting find!</p>
+               </div>
+            </div>
+          </div>   
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 id="story4-title" class="panel-title">
+                <a href="#story4" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"> <span class="glyphicon glyphicon-plane"></span> Financial Crisis</a>
+              </h4>
+            </div>
+            <div id="story4" class="panel-collapse collapse">
+              <div class="panel-body">
+                <p>The airline industry had the worst demand decline ever in 2009, when the global crisis shook most economies. Passenger demand fell 3.5%, with an average load factor of 75.6%. Freight markets also saw a decline of 10.1%, with an average load factor of only 49.1%. The linechart shows how some of the countries with the most incoming passengers in the world experienced significant declines.
+                    <br>
+                    <a href="http://www.abs-cbnnews.com/business/01/28/10/2009-was-worst-year-aviation-industry-capa-report">Source</a></p>
+              </div>
+            </div>
+          </div>      
         </div><!-- end accordion --> 
     </div>
 
@@ -183,12 +210,80 @@
                 });
 
                 $("#story2-title").on("click", function(){
-                    worldmap.showAirlineRoutes("United Airlines");
+                    if (!worldmap.args || worldmap.args.level == "world") {
+                        worldmap.showAirlineRoutes("United Airlines");
+                    }
+                    else if(worldmap.args.level=="country" || worldmap.args.level=="continent") {
+                        worldmap.backToWorldMap();
+                        setTimeout(function(){
+                            worldmap.showAirlineRoutes("United Airlines");   
+                        }, 2200);
+                    }
                 });
 
                 $("#story3-title").on("click", function(){
-                    worldmap.map.zoomContinent("Africa");
+                    // africa connections with other continents
+                    // if (!worldmap.args || worldmap.args.level == "world") {
+                    //     setTimeout(function(){
+                    //             worldmap.wrangleData(function(d) { 
+                    //                 return (d.destination.continent != d.origin.continent) && (d.origin.continent == "Africa" || d.destination.continent == "Africa")}, "country");
+                    //             worldmap.updateVis();
+                    //         }, 2500);
+                    // }
+                    function afriVis() {
+                        worldmap.wrangleData(function(d){ 
+                                    return (d.destination.continent != d.origin.continent) && 
+                                    (d.origin.continent == "Africa" || d.destination.continent == "Africa")}, "country");
+                        worldmap.updateVis();
+                        setTimeout(function(){
+                            worldmap.map.zoomContinent("Africa");
+                            setTimeout(function(){
+                                worldmap.wrangleData(function(d) { return d.origin.continent == "Africa"  && d.destination.continent == "Africa"}, "country");
+                                worldmap.updateVis();
+                            }, 2500);
+                        }, 2500);
+                    }
+                    if (!worldmap.args || worldmap.args.level == "world") {
+                        afriVis();
+                    }
+                    else if(worldmap.args.level=="country" || worldmap.args.level=="continent") {
+                        worldmap.backToWorldMap();
+                        setTimeout(function(){
+                            afriVis();
+                        }, 2200);
+                    }
                 });
+
+                $("#story4-title").on("click", function(){
+                    if (!worldmap.args || worldmap.args.level == "world") {
+                        linechart.wrangleData("story");
+                        linechart.updateVis();
+                    }
+                    else if(worldmap.args.level=="country" || worldmap.args.level=="continent") {
+                        worldmap.backToWorldMap();
+                        setTimeout(function(){
+                            linechart.wrangleData("story");
+                            linechart.updateVis();   
+                        }, 2200);
+                    }
+                });
+
+                $("#story5-title").on("click", function(){
+                    function israelVis() {
+                        worldmap.wrangleData(function(d){ 
+                            return (d.origin.country == "Israel" || d.destination.country == "Israel")}, "country");
+                        worldmap.updateVis();
+                    }
+                    if (!worldmap.args || worldmap.args.level == "world") {
+                        israelVis();
+                    } else {
+                        worldmap.backToWorldMap();
+                        setTimeout(function(){
+                            israelVis();
+                        }, 2000);
+                    }
+                });
+
 
             }
 
