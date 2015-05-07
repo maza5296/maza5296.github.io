@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html>
 <head lang="en">
     <meta charset="UTF-8">
@@ -32,7 +32,7 @@
 
     <!-- add own stylesheet-->
     <link rel="stylesheet" type="text/css" href="css/myStyle.css">
-    <link rel="icon" type="image/png" href="img/favicon.png"/>
+    <link rel="icon" type="image/png" href="/img/favicon.png"/>
 
 </head>
 <body>
@@ -202,16 +202,17 @@
 
                 //  Link airline ranking with map
                 $("#table").on("click","tr.row", function() {
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
                     worldmap.showAirlineRoutes(d3.select(this.children[0]).text())
                 });
 
                 $("#story1-title").on("click", function(){
-                    // $("html, body").animate({ scrollTop: 0 }, "slow");
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
                     worldmap.zoomCountry("CHN");
                 });
 
                 $("#story2-title").on("click", function(){
-                    // $("html, body").animate({ scrollTop: 0 }, "slow");
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
                     if (!worldmap.args || worldmap.args.level == "world") {
                         worldmap.showAirlineRoutes("United Airlines");
                     }
@@ -224,7 +225,7 @@
                 });
 
                 $("#story3-title").on("click", function(){
-                    // $("html, body").animate({ scrollTop: 0 }, "slow");
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
                     // africa connections with other continents
                     // if (!worldmap.args || worldmap.args.level == "world") {
                     //     setTimeout(function(){
@@ -258,7 +259,7 @@
                 });
 
                 $("#story4-title").on("click", function(){
-                    // $("html, body").animate({ scrollTop: 0 }, "slow");
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
                     if (!worldmap.args || worldmap.args.level == "world") {
                         linechart.wrangleData("story");
                         linechart.updateVis();
@@ -273,7 +274,7 @@
                 });
 
                 $("#story5-title").on("click", function(){
-                    // $("html, body").animate({ scrollTop: 0 }, "slow");
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
                     function israelVis() {
                         worldmap.wrangleData(function(d){ 
                             return (d.origin.country == "Israel" || d.destination.country == "Israel")}, "country");
