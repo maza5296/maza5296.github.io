@@ -7,7 +7,7 @@
 <script src="js/aes2.js"></script><!-- 
 <script src="js/rot13.js"></script> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/myStyleWebpage.css">
+<link rel="stylesheet" type="text/css" href="css/myStyle.css">
 <link rel="stylesheet" type="text/css" href="css/mobilenav.css">
 </head>
 <body>
@@ -23,25 +23,27 @@
 
 <div id="authenticate" display="block">
   <div id="option">
-    <h3>Encrypt or Decrypt a source</h3>
-    <form name="encrypt" class="form-inline">
+    <h3>Access this Page</h3>
+    <form name="login" class="form-inline">
+    
+
+  <!-- For now, we will assume single user usage -->
+  <!--  <div class="form-group">
+      <label>Username: </label>
+      <input type="text" class="form-control" name="userid" id="userid" placeholder="Username">
+    </div> -->
     <br>
     <div class="form-group">
-      <label>Source (binary for decryption): </label>
-      <input type="password" class="form-control" name="password" placeholder="Source" ><br>
-      <label>Key (16 chars):   </label>
-      <input type="password" class="form-control" name="key" placeholder="Encryption Key">
+      <label>Master Password: </label>
+      <input type="password" class="form-control" name="pswrd" placeholder="Master Password" >
     </div>
     <br><br>
-    <input type="button" id="encrypt" class="btn btn-primary" value="encrypt"/>
-    <input type="button" id="decrypt" class="btn btn-default" value="decrypt" data-inline="true"/>
+    <input type="button" id="login" class="btn btn-primary" value="Login"/>
+    <input type="reset" id="cancel" class="btn btn-default" value="Cancel" data-inline="true"/>
     </form>
   </div>
 </div>
 <div id="reveal"></div>
 <div id="password"></div>
-<div id="back">
-<p><a href="index.html">return</a></p>
-</div>
 </body>
 </html>

@@ -22,6 +22,14 @@ $(document).ready(function(){
     $('#add').click(function(){
       add(this.form);
     })
+
+    $('#encrypt').click(function(){
+      encrypt(this.form, 1);
+    })
+
+    $('#decrypt').click(function(){
+      encrypt(this.form, 0);
+    })
 });
 
 
@@ -158,4 +166,20 @@ function getstorage(){
     data = items.vault;
     console.log(data);
   });
+}
+
+function encrypt(form, val) {
+  console.log(form);
+  if(form.key.value.length != 16) {
+    alert("Key must be 16 Characters Long for Maximum Security")
+  } else if (val == 1 && form.password.value.length > 16){
+    alert("Password must be less than 16 characters")
+  } else {
+    var pass = form.password.value;
+    var key = form.key.value;
+    document.getElementById("password").textContent = pass.aes(key, val);
+    document.getElementById("reveal").textContent = "Your Encrypted Source is:";
+    document.getElementById("back").style.display = "block";
+    document.getElementById("authenticate").style.display = 'none';
+  }
 }
