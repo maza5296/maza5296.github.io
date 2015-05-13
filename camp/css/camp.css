@@ -1,0 +1,1137 @@
+/* ryu-fellow */
+/* style.css */
+/* support camp.html */
+
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+@import url(http://fonts.googleapis.com/css?family=Delius+Unicase);/*font-family: 'Delius Unicase', cursive;*/
+
+body {
+	margin: 0;
+	background-size: 100%;
+	font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+	border-top: solid 3px rgb(70, 70, 70);
+	background-image: url(../img/back.gif);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+
+/*****************
+ *               *
+ *  GLOBAL LINK  *
+ *               *
+ *****************/
+
+#top-contents  {
+	overflow: hidden;
+	padding: 0px 0px 0px 0px;
+}
+
+#top-main-contents  {
+}
+
+
+/*******************************************************
+ *
+ * link-guide
+ *
+ */
+#link-guide {
+	margin: 0px 0px 0px;
+}
+
+#link-guide a:hover {
+	color: rgb(250, 250, 250);
+	border-radius: 2px;
+	background-color: rgb(150, 150, 150);
+}
+
+#link-guide table {
+	border: none;
+	border-collapse: collapse;
+	display: inline-block;
+}
+
+#link-guide td {
+	border: none;
+}
+
+
+/* table-left */
+
+.table-left {
+	position: fixed;
+	top: 0;
+}
+
+.table-left p {
+	font-size: 13px;
+	padding: 0px 8px 0px;
+	margin: 0;
+	color: rgb(100, 100, 100);
+}
+
+.table-left a {
+	color: rgb(100, 100, 100);
+	text-decoration: none;
+}
+
+
+/* table-right */
+
+.table-right {
+	position: absolute;
+	right: 0;
+}
+
+.table-right td {
+	color: rgb(70, 70, 70);
+	padding: 13px 16px 12px;
+}
+
+.table-right a {
+	color: rgb(70, 70, 70);
+	text-decoration: none;
+}
+
+/***************
+ *             *
+ *  back color *
+ *             *
+ ***************/
+
+#back-black {
+	width: 40px;
+	height: 32px;
+	background-color: rgb(70, 70, 70);
+}
+
+#back-black p {
+	color: rgb(250, 250, 250);
+}
+
+#back-white {
+}
+
+#back-white h1 {
+	color: rgb(70, 70, 70);
+}
+
+
+/***********************
+ * navi
+ */
+#navi {
+	text-align: right;
+}
+
+#navi ul {
+	list-style: none;
+	margin-bottom: 0;
+}
+
+#navi li {
+	padding: 0px 15px 0px;
+	display: inline-block;
+}
+
+#navi a {
+	text-decoration: none;
+	color: rgb(50, 50, 50);
+}
+
+#navi a:hover {
+	color: rgb(250, 250, 250);
+	border-radius: 2px;
+	background-color: rgb(150, 150, 150);
+}
+
+
+/* nav */
+#nav  {
+	color: rgb(60, 60, 60);
+	letter-spacing: 3px;
+	margin: 10px 0px 0px 0px;
+	padding: 0px 0px 0px;
+}
+#nav a  {
+	color: rgb(60, 60, 60);
+	text-decoration: none;
+}
+
+#nav ul  {
+	width: 100%;
+	text-align: center;
+	padding: 0;
+}
+
+#nav li  {
+	display: inline-block;
+	list-style: none;
+	padding: 10px 0px 10px 0px;
+	margin: 0px 20px 0px 20px;
+	font-family: 'Helvetica Neue', 'Helvetica';
+	font-weight: 400;
+	font-size: 28px;
+}
+
+#nav h2 {
+	margin: 0;
+	color: rgb(250, 250, 250);
+	font-weight: 100;
+	font-size: 50px;
+}
+
+#mark-line {
+}
+
+
+
+/**************
+ *            *
+ *  CONTENTS  *
+ *            *
+ **************/
+
+
+/* top-side */
+#top-side-left  {
+	width: 25%;
+	float: left;
+	text-align: center;
+	padding: 200px 0px 200px 0px;
+	background-image: url(../../img/Harvard-2.jpg);
+	background-size: auto 100%;
+}
+#top-side-right  {
+	width: 25%;
+	float: left;
+	text-align: center;
+	padding: 200px 0px 200px 0px;
+	background-image: url(../../img/Harvard.gif);
+	background-size: auto 100%;
+}
+
+
+/******************
+ *                *
+ *  mobile image  *
+ *                *
+ ******************/
+#mobile-image {
+	display: none;
+	position: fixed;
+	right: 0;
+	z-index: -1;
+	margin-top: -80px;
+}
+
+
+
+/*********
+ *       *
+ *  bar  *
+ *       *
+ *********/
+#bar {
+	opacity: 0;
+	width: 80%;
+	margin: auto;
+}
+
+
+/*
+emergency
+*/
+
+#emergency{
+    background-color: rgba(255,255,0,0.7);
+    padding: 30px;
+    text-align: left;
+}
+
+#emergency li{
+    margin: 10px 30px;
+}
+
+
+/*********
+ *       *
+ *  ryu  *
+ *       *
+ *********/
+#ryu  {
+	width: 100%;
+	text-align: center;
+	font-family: 'Helvetica Neue', 'Helvetica';
+	font-weight: 300;
+	margin: 0px auto 0px auto;
+	padding: 40px 0px 20px 0px;
+	color: rgb(68, 116, 225);
+}
+
+#ryu h1  {
+	font-size: 28px;
+	font-family: 'Lato';
+	font-weight: 300;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 5% 0px 5%;
+}
+
+#ryu img  {
+	width: 150px;
+	margin-left: 0px;
+}
+
+
+
+/***************************
+ * ryu-2
+ */
+#ryu-2 {
+}
+
+#ryu-2 h1  {
+	color: rgb(70, 70, 70);
+	text-align: left;
+	letter-spacing: 5px;
+	padding: 50px 8% 50px 8%;
+	margin-top: 0px;
+	margin-bottom: 0.2%;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+#ryu-2 h3 {
+	color: rgb(65, 65, 65);
+	padding: 10px 8% 10px;
+}
+
+#ryu-2 h4 {
+	color: rgb(70, 70, 70);
+	letter-spacing: 2px;
+	line-height: 27px;
+	padding: 40px 8% 40px;
+	margin: 0;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+/****************************
+ * ryu-3
+ */
+#ryu-3  {
+	width: 100%;
+	margin: 0px 0px 0px 0px;
+	color: rgb(250, 250, 250);
+	text-align: left;
+}
+
+#ryu-3:hover  {
+}
+
+#ryu-3 h1  {
+	color: rgb(70, 70, 70);
+	text-align: left;
+	letter-spacing: 5px;
+	padding: 50px 8% 50px 8%;
+	margin-top: 0px;
+	margin-bottom: 0.2%;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+#ryu-3 h3 {
+	color: rgb(65, 65, 65);
+	padding: 10px 8% 10px;
+	margin-bottom: 0px;
+}
+
+#ryu-3 img  {
+	width: 100%;
+	margin: 50px 0px 0px 0px;
+}
+
+#ryu-3 h4 {
+	color: rgb(5, 98, 220);
+	letter-spacing: 2px;
+	line-height: 27px;
+	margin: 28px 8% 20px;
+	padding: 0px 0px 5px;
+}
+
+
+
+/*****************************
+ * ryu-4
+ */
+#ryu-4  {
+	clear: both;
+	margin: 0px auto 0px auto;
+	color: rgb(250, 250, 250);
+	text-align: left;
+}
+
+#ryu-4:hover  {
+}
+
+#ryu-4 h1  {
+	color: rgb(70, 70, 70);
+	text-align: left;
+	letter-spacing: 5px;
+	padding: 50px 8% 50px;
+	margin-top: 0px;
+	margin-bottom: 0.2%;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+#ryu-4 h3 {
+	color: rgb(65, 65, 65);
+	padding: 10px 8% 10px;
+}
+
+#ryu-4 img  {
+	width: 50%;
+	display: block;
+	margin: 10px auto 40px;
+}
+
+#ryu-4 h4 {
+	color: rgb(5, 98, 220);
+	letter-spacing: 2px;
+	line-height: 27px;
+	padding: 10px 8% 10px;
+	margin: 0;
+}
+
+
+/*****************************
+ * ryu-5
+ */
+#ryu-5  {
+	clear: both;
+	margin: 0px auto 0px auto;
+	color: rgb(250, 250, 250);
+	text-align: left;
+}
+
+#ryu-5:hover  {
+}
+
+#ryu-5 h1  {
+	color: rgb(70, 70, 70);
+	text-align: left;
+	letter-spacing: 5px;
+	padding: 50px 8% 50px 8%;
+	margin-top: 0px;
+	margin-bottom: 0.2%;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+#ryu-5 h3 {
+	color: rgb(65, 65, 65);
+	padding: 20px 8% 10px;
+	margin-top: 0px;
+}
+
+#ryu-5 img  {
+	width: 50%;
+	display: block;
+	margin: 10px auto 40px;
+}
+
+#ryu-5 h4 {
+	color: rgb(5, 98, 220);
+	letter-spacing: 2px;
+	line-height: 27px;
+	padding: 28px 0px 5px;
+	margin: 0px 8% 20px;
+}
+
+/****************************************************************
+ *
+ * ryu-0-A
+ *
+ */
+#ryu-0-A {
+	clear: both;
+	width: 100%;
+	padding-top: 80px;
+}
+
+#ryu-0-A h1  {
+	color: rgb(70, 70, 70);
+	text-align: left;
+	letter-spacing: 5px;
+	padding: 50px 8% 50px 8%;
+	margin-top: 0px;
+	margin-bottom: 0.2%;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+#ryu-0-A h4 {
+	color: rgb(70, 70, 70);
+	letter-spacing: 2px;
+	line-height: 27px;
+	padding: 40px 8% 40px;
+	margin: 0;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+#ryu-0-A tr, td, th {
+	color: rgb(70, 70, 70);
+}
+
+#ryu-0-A table {
+	width: 100%;
+	text-align: center;
+}
+
+.td-cross {
+	padding: 7px 5px 7px;
+	color: rgb(250, 250, 250);
+	border: none;
+}
+
+.td-time {
+	font-size: 13px;
+	padding: 7px 5px 7px;
+	color: rgb(250, 250, 250);
+	background-color: rgba(70, 70, 70, 0.7);
+}
+
+.td-schedule {
+	width: 18%;
+	font-size: 15px;
+	padding: 5px 5px 5px;
+	border-top: solid 1px rgb(180, 180, 180);
+	border-bottom: solid 1px rgb(180, 180, 180);
+	border-right: solid 1px rgb(180, 180, 180);
+	border-left: solid 1px rgb(180, 180, 180);
+
+}
+
+.td-day {
+	width: 18%;
+	font-size: 15px;
+	padding: 5px 5px 5px;
+	color: rgb(250, 250, 250);
+	background-color: rgba(0, 93, 215, 0.7);
+}
+
+.table-schedule {
+	padding: 40px 7% 60px;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+
+
+/****************************************************************
+ *
+ * members back color
+ *
+ */
+.members-backColor {
+	padding: 0px 0px 10px;
+	margin-bottom: 0.2%;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+
+/****************************************************************
+ *
+ * FAQ
+ *
+ */
+.faq {
+	width: 49.9%;
+	float: left;
+}
+
+#faq-left {
+	margin-right: 0.2%;
+}
+
+.faq-category-1 {
+	padding: 20px 0px 20px;
+	margin-bottom: 0.3%;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+
+/****************************************************************
+ *
+ * apply-button
+ *
+ */
+#apply-button {
+	color: rgb(250, 250, 250);
+	text-align: center;
+}
+
+
+/*****************************************************************
+ *
+ * table-members
+ *
+ */
+#table-members {
+}
+
+
+/****************************************************************
+ *
+ * how to apply
+ *
+ */
+.howToApply {
+	padding-top: 20px;
+	padding-bottom: 10px;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+
+
+/****************************************************************
+ *
+ * workshop
+ *
+ */
+.workshop {
+	padding: 1px 0px 1px;
+	margin-bottom: 0.4%;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+.workshop-float {
+	width: 49.9%;
+	float: left;
+}
+
+#workshop-left {
+	margin-right: 0.2%;
+}
+
+#workshop-left-1 {
+	margin-right: 0px;
+}
+
+#workshop-left-2 {
+}
+
+#workshop-right-1 {
+}
+
+#workshop-right-2 {
+}
+
+#workshop-right-3 {
+	margin-bottom: 80px;
+}
+
+
+/**
+ * line
+ */
+#line  {
+	font-family: "LinotypeUniversW01-Regu", "Gothic Medium BBB", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", sans-serif;
+	margin: 50px 0px 0px;
+}
+
+#line h5 {
+	font-size: 15px;
+	color: rgb(60, 60, 60);
+	padding: 10px 8% 10px;
+	margin: 25px 0px 0px;
+}
+
+#line h6 {
+	color: rgb(60, 60, 60);
+	padding: 10px 8% 10px;
+}
+
+#line p {
+	color: rgb(70, 70, 70);
+	letter-spacing: 1px;
+	line-height: 27px;
+	padding: 0px 8% 0px;
+	margin: 0px 0px 40px;
+}
+
+#line a {
+	color: rgb(32, 32, 35);
+	text-decoration: none;
+	border-bottom: solid 1px rgb(60, 60, 60);
+}
+
+
+/**
+ * line-side-space
+ */
+#line-side-space-1 {
+	padding: 40px 0px 0px;
+	margin: 0px 0px 80px;
+}
+
+#line-side-space-2 {
+	padding: 0px 0px 0px;
+	margin: 0px 0px 0px;
+}
+
+#line-side-space-3 {
+	clear: both;
+	padding: 80px 0px 0px;
+	margin: 0px 0px 0px;
+}
+
+#line-side-space-4 {
+	clear: both;
+	padding: 80px 0px 0px;
+	margin: 0px 0px 0.2%;
+}
+
+#line-side-space-5 {
+	padding: 40px 0px 40px;
+	margin: 0px 0px 80px;
+	background-color: rgba(5, 98, 208, 0.9);
+	-moz-transition-property: background-color;
+	-webkit-transition-property: background-color;
+	-o-transition-property: background-color;
+	-ms-transition-property: background-color;
+
+	-moz-transition-duration:0.3s;
+	-webkit-transition-duration:0.3s;
+	-o-transition-duration:0.3s;
+	-ms-transition-duration:0.3s;
+}
+
+#line-side-space-5:hover {
+	background-color: rgba(70, 70, 70, 0.9);
+}
+
+/*
+#line-side-space-5 h2 {
+	-moz-transition-property: transform;
+	-webkit-transition-property: transform;
+	-o-transition-property: transform;
+	-ms-transition-property: transform;
+
+	-moz-transition-duration:0.4s;
+	-webkit-transition-duration:0.4s;
+	-o-transition-duration:0.4s;
+	-ms-transition-duration:0.4s;
+}
+
+#line-side-space-5:hover h2 {
+	-moz-transform: translateX(-20%);
+	-webkit-transform: translateX(-20%);
+	-o-transform: translateX(-20%);
+	-ms-transform: translateX(-20%);
+}
+*/
+
+/**
+ * Under line
+ */
+#underLine {
+	width: 100px;
+	border-bottom: solid 2px rgb(50, 50, 50);
+	margin: 50px auto 60px auto;
+}
+
+
+
+/* select */
+#select  {
+	width: 100%;
+	bottom: 0;
+	text-align: center;
+	padding: 20px 0px 16px 0px;
+	margin: 0px 0px 0px 0px;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+#select p  {
+	margin: 0;
+	font-size: 6px;
+	padding: 0px 10px 0px 10px;
+}
+
+/*****************************************************************
+ *
+ * members
+ *
+ */
+#members {
+	padding: 0px 8% 0px;
+}
+
+#members small {
+	letter-spacing: 1px;
+	font-size: 15px;
+}
+
+#members ul {
+	padding: 0;
+	margin: 8px 0px 18px;
+}
+
+#members li {
+	list-style: none;
+	color: rgb(70, 70, 70);
+}
+
+.members-float {
+	display: inline-table;
+	margin-right: 20px;
+}
+
+#member-name {
+	font-size: 15px;
+	margin-bottom: 8px;
+}
+
+#add-marginRight {
+	margin-left: 100px;
+}
+
+
+
+/*****************************************************************
+ *
+ * how to apply
+ *
+ */
+#apply {
+	padding: 0px 8% 0px;
+}
+
+#apply ul {
+	padding: 0;
+	margin: 8px 0px 8px;
+}
+
+#apply li {
+	display: inline-block;
+	color: rgb(70, 70, 70);
+}
+
+#list-name {
+}
+
+
+/*****************************************************************
+ *
+ * caravan-item
+ *
+ */
+.caravan-item {
+	font-size: 14px;
+	color: rgb(250, 250, 250);
+}
+
+
+/*********************
+ *                   *
+ *  for smart phone  *
+ *                   *
+ *********************/
+#forSmartPhone-1 {
+	padding: 1px 0px 1px;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+#forSmartPhone-2 {
+	padding: 1px 0px 1px;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+
+ /*********************
+ *                   *
+ *  for PC           *
+ *                   *
+ *********************/
+
+
+
+
+/******************
+ *                *
+ *  Bottom links  *
+ *                *
+ ******************/
+
+/***********************************************************
+ * ryu 6
+ */
+#ryu-6  {
+	width: 33.33%;
+	height: 300px;
+	float: left;
+	overflow: hidden;
+	margin: 0px 0px 0px 0px;
+	color: rgb(250, 250, 250);
+	text-align: center;
+	background-image: url(../../img/41.gif);
+	background-position: center;
+	background-size: auto 100%;
+}
+
+#ryu-6:hover  {
+	color: rgb(250, 250, 250);
+}
+
+#ryu-6 h3  {
+	padding-top: 25%;
+	margin: 0;
+	color: rgb(250, 250, 250);
+}
+
+#ryu-6 img  {
+	width: 100%;
+	margin: 50px 0px 0px 0px;
+}
+
+/***********************************************************
+ * ryu 7
+ */
+#ryu-7  {
+	width: 33.33%;
+	height: 300px;
+	float: left;
+	overflow: hidden;
+	margin: 0px 0px 0px 0px;
+	color: rgb(250, 250, 250);
+	text-align: center;
+	background-image: url(../../img/50.gif);
+	background-size: 100%;
+	background-position: center;
+}
+
+#ryu-7:hover  {
+	color: rgb(250, 250, 250);
+}
+
+#ryu-7 h3  {
+	padding-top: 25%;
+	margin: 0;
+	color: rgb(250, 250, 250);
+}
+
+#ryu-7 img  {
+	width: 100%;
+	margin: 50px 0px 0px 0px;
+}
+
+/***********************************************************
+ * ryu 8
+ */
+#ryu-8  {
+	width: 33.33%;
+	height: 300px;
+	float: left;
+	position: relative;
+	z-index: 2;
+	overflow: hidden;
+	color: rgb(250, 250, 250);
+	background-image: url(../../img/51.gif);
+	background-size: 100%;
+	background-position: center;
+	text-align: center;
+}
+
+#ryu-8:hover  {
+	color: rgb(250, 250, 250);
+}
+
+#ryu-8 h3  {
+	padding-top: 24%;
+	margin: 0;
+	color: rgb(250, 250, 250);
+}
+
+#ryu-8 img  {
+	width: 100%;
+	margin: 50px 0px 0px 0px;
+}
+
+
+
+/***********************
+ * ryu-side
+ * Include Link
+ */
+#ryu-side-right  {
+	width: 25%;
+	float: left;
+	overflow: hidden;
+	text-align: center;
+	margin: 0px auto 0px auto;
+	padding: 0px 0px 0px 0px;
+	color: rgb(250, 250, 250);
+	background-image: url(../../img/42.gif);
+	background-size: auto 100%;
+	background-position: center;
+}
+
+/* link */
+#ryu-side-right h3 {
+	margin: 0;
+	padding-top: 30%;
+	color: rgb(250, 250, 250);
+}
+
+#link {
+	overflow: hidden;
+}
+
+
+/************************
+ * box-link
+ */
+#box-link {
+	background-image: url(../../img/42.gif);
+	background-size: auto 100%;
+	background-position: center;
+}
+
+#box-link-hide {
+	background-color: rgba(107, 121, 132, 0.7);
+}
+
+/***********************************************************
+ * box-navi
+ */
+#box-navi {
+	height: 300px;
+	background-image: url(../../img/41.gif);
+	background-position: center;
+	background-size: auto 100%;
+}
+
+#box-navi-hide {
+	height: 300px;
+	background-color: rgba(107, 121, 132, 0.7);
+}
+
+#box-navi-hide h2 {
+}
+
+/***********************
+ * box-caraban
+ */
+#box-caraban {
+	height: 300px;
+	background-image: url(../../img/50.gif);
+	background-size: 100%;
+	background-position: center;
+}
+
+#box-caraban-hide {
+	height: 300px;
+	background-color: rgba(107, 121, 132, 0.7);
+}
+
+#box-caraban-hide h2 {
+}
+
+/***********************
+ * box-camp
+ */
+#box-camp {
+	height: 300px;
+	position: relative;
+	z-index: 1;
+	background-image: url(../../img/51.gif);
+	background-size: 100%;
+	background-position: center;
+}
+
+#box-camp-hide {
+	height: 300px;
+	background-color: rgba(107, 121, 132, 0.7);
+}
+
+
+/***********************
+ * same-box
+ */
+#same-box {
+	-moz-transition-property: transform;
+	-webkit-transition-property: transform;
+	-o-transition-property: transform;
+	-ms-transition-property: transform;
+
+	-moz-transition-duration:0.3s;
+	-webkit-transition-duration:0.3s;
+	-o-transition-duration:0.3s;
+	-ms-transition-duration:0.3s;
+}
+
+#same-box:hover {
+	-moz-transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+}
+
+/***********************
+ * same-box-half
+ */
+#same-box-half {
+	-moz-transition-property: transform;
+	-webkit-transition-property: transform;
+	-o-transition-property: transform;
+	-ms-transition-property: transform;
+
+	-moz-transition-duration:0.3s;
+	-webkit-transition-duration:0.3s;
+	-o-transition-duration:0.3s;
+	-ms-transition-duration:0.3s;
+}
+
+#same-box-half:hover {
+	-moz-transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+}
+
+
+/***********************
+ *
+ * Class box-hide
+ *
+**/
+.box-hide {
+
+}
+
+.box-hide h2 {
+	font-size: 22px;
+	font-weight: 400;
+	margin: 0;
+	padding: 2% 0px 10px 0px;
+	color: rgb(250, 250, 250);
+}
+
+.box-hide p {
+	font-size: 14px;
+	margin: 0px 0px 0px 0px;
+	color: rgb(250, 250, 250);
+}
+
+
+.box-hide table {
+	width: 60%;
+	margin: 0px auto 0px auto;
+	color: rgb(250, 250, 250);
+	border-collapse: collapse;
+}
+
+.box-hide table, th, td {
+	border: solid 2px rgb(250, 250, 250);
+}
+
+.box-hide th, td {
+	padding: 4px 0px 4px 0px;
+}
