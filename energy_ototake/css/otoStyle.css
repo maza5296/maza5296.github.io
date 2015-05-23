@@ -1,0 +1,35 @@
+.otoNav {
+	position: fixed;
+}
+
+#content {
+	margin: 0px 15% 0px 15%;
+	padding-top: 100px;
+}
+
+.h2 {
+	border-bottom: 1px solid #e2e2e2;
+}
+
+.kube-docs-head{
+	margin: 4.949999999999999em 0 1.65em 0;
+  	font-size: 18px;
+  	font-weight: 300;
+  	padding-bottom: 10px;
+  	border-bottom: 1px solid #e2e2e2;
+}
+.top{
+	margin: 0 0 1.65em 0;
+}
+
+.pdf {
+	height: 570px;
+}
+
+.grey {
+	padding: 30px 50px;
+	background: #e0e3e5;
+	font-size: 105%;
+  	margin-bottom: 1.65em;
+  	position: fixed;
+}
