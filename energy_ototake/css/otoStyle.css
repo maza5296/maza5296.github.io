@@ -7,6 +7,12 @@ body{
 	position: fixed;
 }
 
+@media screen and (max-width: 600px) {
+	.otoNav {
+		display: none;
+	}
+}
+
 #content {
 	margin: 0px 15% 0px 15%;
 	padding-top: 50px;
@@ -51,6 +57,11 @@ table.table-flat tr:hover td{
 	margin: 50px 0 0 0;
 }
 
-#reveal {
+.mark-red{
+	background-color: lightcoral;
 
+}
+
+.mark-green {
+	background-color: lightgreen;
 }
