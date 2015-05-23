@@ -15,7 +15,9 @@
     	$("#reality").fadeIn(2000);
     	$("#question").css("display", "none");
     }
-
+    function redirect() {
+    	window.location = "http://www.maza5296.github.io/energy_ototake/thankyou.html";
+    }
 	</script>
 </head>
 <body>
@@ -237,18 +239,17 @@
 
 					<h5>早くもバブル崩壊か？</h5>
 					<p>
-						14年9月24日、再生可能エネルギー電源業界に激震が走った。九州電力が「再生可能エネルギー電源の新規の電力系統網への接続申込みへの回答を保留する」と発表したのだ（「九州本土の再生可能エネルギー発電設備に対する接続申込みの回答保留について」九州電力）。
+						14年9月24日、再生可能エネルギー電源業界に激震が走った。九州電力が<span class="mark-red">「再生可能エネルギー電源の新規の電力系統網への接続申込みへの回答を保留する」</span>と発表したのだ（「九州本土の再生可能エネルギー発電設備に対する接続申込みの回答保留について」九州電力）。
 						<br>
 						その後、四国電力、東北電力、北海道電力、沖縄電力が相次いで同様の発表をした。言い方は悪いが「大電力会社の系統網」という「他人のふんどし」を借りて電気を売ることで拡大を続けてきた再生可能エネルギー電源業界にとって、この通知は晴天の霹靂となった。
 					（<a href="http://jbpress.ismedia.jp/articles/-/42599" target="_blank">続き</a>）</p>
 
 					<h2 class="kube-docs-head" id="question">もう一度聞きます。あなたが内閣総理大臣ならこの法案を指示しますか？</h2>
 					<ul class="blocks-2">
-					    <li style="text-align: center"><a href=""><button class="btn btn-big btn-round">支持する</button></a></li>
-					    <li style="text-align: center"><a href=""><button class="btn btn-big btn-round">支持しない</button></a></li>
+					    <li style="text-align: center"><a href=""><button class="btn btn-big btn-round" onclick="redirect()">支持する</button></a></li>
+					    <li style="text-align: center"><a href=""><button class="btn btn-big btn-round" onclick="redirect()">支持しない</button></a></li>
 					</ul>
 					<div class="spacer"></div>
-
    			 	</div>
 			</div>
 		</div>

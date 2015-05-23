@@ -65,3 +65,7 @@ table.table-flat tr:hover td{
 .mark-green {
 	background-color: lightgreen;
 }
+.finish{
+	top: 50%;
+	text-align: center;
+}
