@@ -1,14 +1,23 @@
+body{
+	color: rgb(50, 50, 50);
+}
+
+
 .otoNav {
 	position: fixed;
 }
 
 #content {
 	margin: 0px 15% 0px 15%;
-	padding-top: 100px;
+	padding-top: 50px;
 }
 
 .h2 {
 	border-bottom: 1px solid #e2e2e2;
+}
+
+table.table-flat tr:hover td{
+	background-color: #f9f9f9;
 }
 
 .kube-docs-head{
@@ -32,4 +41,16 @@
 	font-size: 105%;
   	margin-bottom: 1.65em;
   	position: fixed;
+}
+
+.spacer{
+	margin: 100px 0 0 0;
+}
+
+.spacer2{
+	margin: 50px 0 0 0;
+}
+
+#reveal {
+
 }

@@ -10,23 +10,22 @@
     <link rel="stylesheet" href="css/otoStyle.css" />
     <script src="js/jquery.js"></script>
     <script src="js/kube.min.js"></script>
+    <script>
+    function reveal() {
+    	$("#reality").fadeIn(2000);
+    	$("#question").css("display", "none");
+    }
 
+	</script>
 </head>
 <body>
-<nav class="navbar fullwidth grey">
-    <ul>
-        <li>乙武塾・エネルギー</li>
-    	<li>固定価格買い取り制度について</li>
-    	<li>by Masahiro Kusunoki</li>
-    </ul>
-</nav>
 	<div id="content">
 	    <div class="units-row">
 			<div class="unit-40">
 	    		<nav class="nav otoNav">
 				<ul>
 					<li><a href="#what">What</a></li>
-					<li><span>How</span></li>
+					<li><a href="#how">How</a></li>
 					<li><a href="#">Why</a></li>
 					<li><a href="#">Impact</a></li>
 				</ul>
@@ -36,7 +35,6 @@
 			<div class="unit-push-right unit-80">
 				<h2 class="kube-docs-head top">固定価格買い取り制度とは？</h2>
 				<p>平成23年8月26日に成立した、「電気事業者による再生可能エネルギー電気の調達に関する特別措置法」に基づき、今年7月1日より実施される。太陽光、風力、水力、地熱、バイオマスの再生可能エネルギー源を用いて発電された電気を、国が定める価格で一定期間電気事業者（電力大手10社）が買い取ることを義務付ける制度。この制度の利用には「設備認定」を受ける必要がある。</p>
-				<p>太陽光発電に関しては、10kW未満の（住宅用等）の場合、現状と同じ余剰電力の買取制度が適用される。電気事業者が買取りに要した費用は、電気料金の一部として、国民が再生可能エネルギー発電推進付加金によってまかなう。</p>
 
 				<h5>買取対象</h5>
 				<ul>
@@ -61,128 +59,181 @@
 					  <p>It appears you don't have a PDF plugin for this browser.
 					  No biggie... you can <a href="source/METI.pdf">click here to
 					  download the PDF file.</a></p>
-					  
 				</object>
 				<br>
 				<caption>参考：</caption>
-				<p>平成26年度は以下の値段での買い取りが決まっています。</p>
-				<table class="table-hovered">
-					  <tr>
-					    <th>電源</th>
-					    <th>調達区分</th>
-					    <th>調達価格1kW当たり</th>
-					    <th>調達期間</th>
-					  </tr>
-					  <tr>
-					    <th rowspan="3">太陽光</th>
-					    <td>10kW以上</td>
-					    <td>32円（＋税）</td>
-					    <td>20年</td>
-					  </tr>
-					  <tr>
-					    <td>10kW未満（余剰買取）</td>
-					    <td>37円</td>
-					    <td rowspan="2">10年</td>
-					  </tr>
-					  <tr>
-					    <td>10kW未満（ダブル発電・余剰買取）</td>
-					    <td>30円</td>
-					  </tr>
-					  <tr>
-					    <th rowspan="2">風力</th>
-					    <td>20kW以上</td>
-					    <td>22円（＋税）</td>
-					    <td rowspan="3">20年</td>
-					  </tr>
-					  <tr>
-					    <td>20kW未満</td>
-					    <td>55円（＋税）</td>
-					  </tr>
-					  <tr>
-					    <th>洋上風力</th>
-					    <td>−</td>
-					    <td>36円（＋税）</td>
-					  </tr>
-					  <tr>
-					    <th rowspan="2">地熱</th>
-					    <td>1.5万kW以上</td>
-					    <td>26円（＋税）</td>
-					    <td rowspan="2">15年</td>
-					  </tr>
-					  <tr>
-					    <td>1.5万kW未満</td>
-					    <td>40円（＋税）</td>
-					  </tr>
-					  <tr>
-					    <th rowspan="3">水力</th>
-					    <td>1,000kW以上30,000kW未満</td>
-					    <td>24円（＋税）</td>
-					    <td rowspan="6">20年</td>
-					  </tr>
-					  <tr>
-					    <td>200kW以上1,000kW未満</td>
-					    <td>29円（＋税）</td>
-					  </tr>
-					  <tr>
-					    <td>200kW未満</td>
-					    <td>34円（＋税）</td>
-					  </tr>
-					  <tr>
-					    <th rowspan="3">既設導水路活用中小水力</th>
-					    <td>1,000kW以上30,000kW未満</td>
-					    <td>14円（＋税）</td>
-					  </tr>
-					  <tr>
-					    <td>200kW以上1,000kW未満</td>
-					    <td>21円（＋税）</td>
-					  </tr>
-					  <tr>
-					    <td>200kW未満</td>
-					    <td>25円（＋税）</td>
-					  </tr>
-					</table>
+				<p>平成26年度の調達価格と調達期間。こちらの制度は毎年見直されることになっていて、現在は再生可能エネルギー発電のコスト低下に伴い、買い取り価格も下降の傾向にある。</p>
+				<table class="table-flat">
+				  <tr>
+				    <th>電源</th>
+				    <th>調達区分</th>
+				    <th>調達価格1kW当たり</th>
+				    <th>調達期間</th>
+				  </tr>
+				  <tr>
+				    <th rowspan="3">太陽光</th>
+				    <td>10kW以上</td>
+				    <td>32円（＋税）</td>
+				    <td>20年</td>
+				  </tr>
+				  <tr>
+				    <td>10kW未満（余剰買取）</td>
+				    <td>37円</td>
+				    <td rowspan="2">10年</td>
+				  </tr>
+				  <tr>
+				    <td>10kW未満（ダブル発電・余剰買取）</td>
+				    <td>30円</td>
+				  </tr>
+				  <tr>
+				    <th rowspan="2">風力</th>
+				    <td>20kW以上</td>
+				    <td>22円（＋税）</td>
+				    <td rowspan="3">20年</td>
+				  </tr>
+				  <tr>
+				    <td>20kW未満</td>
+				    <td>55円（＋税）</td>
+				  </tr>
+				  <tr>
+				    <th>洋上風力</th>
+				    <td>−</td>
+				    <td>36円（＋税）</td>
+				  </tr>
+				  <tr>
+				    <th rowspan="2">地熱</th>
+				    <td>1.5万kW以上</td>
+				    <td>26円（＋税）</td>
+				    <td rowspan="2">15年</td>
+				  </tr>
+				  <tr>
+				    <td>1.5万kW未満</td>
+				    <td>40円（＋税）</td>
+				  </tr>
+				  <tr>
+				    <th rowspan="3">水力</th>
+				    <td>1,000kW以上30,000kW未満</td>
+				    <td>24円（＋税）</td>
+				    <td rowspan="6">20年</td>
+				  </tr>
+				  <tr>
+				    <td>200kW以上1,000kW未満</td>
+				    <td>29円（＋税）</td>
+				  </tr>
+				  <tr>
+				    <td>200kW未満</td>
+				    <td>34円（＋税）</td>
+				  </tr>
+				  <tr>
+				    <th rowspan="3">既設導水路活用中小水力</th>
+				    <td>1,000kW以上30,000kW未満</td>
+				    <td>14円（＋税）</td>
+				  </tr>
+				  <tr>
+				    <td>200kW以上1,000kW未満</td>
+				    <td>21円（＋税）</td>
+				  </tr>
+				  <tr>
+				    <td>200kW未満</td>
+				    <td>25円（＋税）</td>
+				  </tr>
+				</table>
 
-					<h2 class="kube-docs-head">制度導入の背景</h2>
-					
-					<h5>政府のインセンティブ</h5>
-					<ol>
-						<li>地球温暖化対策<br>
-							民主党が政権獲得のためのマニフェストに掲げた地球温暖化対策としての温室効果ガス(CO2) の排出削減のためにその法案化を図ろうとしてきた「地球温暖化対策基本法案(以下「温対法」)」の三本柱の一 つとされてきた。この三本柱とは、「環境税の導入」、「国内排出量取引制度」および、この「FIT 制度」であった。</li>
-							<br>
-						<li>脱原子力依存<br>
-							東日本大震災及び福島第一原子力発電所における事故を経て、中長期的に脱原子力依存を進めていくためにも再生可能エネルギーに対する期待はこれまで以上に高まった。</li>
-					</ol>
+				<h2 class="kube-docs-head">制度導入の背景</h2>
+				
+				<h5>政府のインセンティブ</h5>
+				<ol>
+					<li>地球温暖化対策
+						（<a href="http://www1.dpj.or.jp/policy/manifesto/seisaku2009/19.html" target="_blank">出典</a>）</li>
+						<br>
+					<li>脱原子力依存
+						（<a href="source/ieei.pdf" target="_blank">出典</a>）</li>
+				</ol>
 
-					<h5>業者のインセンティブ</h5>
-					<ol>
-						<li>投資リスク<br>
-						前例がない産業ということもあり、投資にはリスクが伴います。北海道電力は2008年まで風力発電は抽選で行われていたという事実もある。計画的な投資ができない。
-						<a href="http://www.hepco.co.jp/info/2008/1173967_983.html">出典</a></li><br>
-						<li>価格競争<br>
-						再生可能エネルギーは火力、原子力よりもコストがはるかに高かった。技術開発の費用、設備の需要の少なさによる費用向上など、新しい分野なだけに、そのハードルは高かった。従来通りの市場に置ける競争では全く勝てない状況を打開。</li>
-					</ol>
+				<h5>業者のインセンティブ</h5>
+				<ol>
+					<li>投資リスク<br>
+						<ul>
+							<li>認定・選定方法（<a href="http://www.hepco.co.jp/info/2008/1173967_983.html" target="_blank">出典1</a>）
+							</li>
+							<li>環境アセスメント（<a href="source/assess.pdf"  target="_blank">出典2</a>）
+							</li>
+						</ul>
+					</li><br>
+					<li>価格競争（<a href="http://www.asiabiomass.jp/topics/1202_01.html" target="_blank">出典</a>）</li>
+				</ol>
 
+				<div class="spacer"></div>
+				<div id="question">
+					<h2 class="kube-docs-head" id="question">あなたが内閣総理大臣ならこの法案を指示する？</h2>
 					<ul class="blocks-2">
-					    <li style="text-align: center"><button class="btn btn-big btn-round">賛成</button></li>
-					    <li style="text-align: center"><button class="btn btn-big btn-round">反対</button></li>
+					    <li style="text-align: center"><button class="btn btn-big btn-round" onclick="reveal()">支持する</button></li>
+					    <li style="text-align: center"><button class="btn btn-big btn-round" onclick="reveal()">支持しない</button></li>
 					</ul>
-					
+					<div class="spacer"></div>
+				</div>
 
-					<h2 class="kube-docs-head">実状</h2>
-					<h5>成果</h5><br>
+				<div id="reality" style="display: none">
+					<h2 class="kube-docs-head">法案の成果</h2>
 					<ol>
 						<li>自然エネルギーの急増<br>
-							日本の発電量に占める自然エネルギー等(水力除く)の割合は、2001 年度からの 10 年間では、0.7%から 1.1%へわずか 0.4%しか増えなかった。しかし固定価格買取制 度開始後、2013 年度には 2.5%と急増した。データが得られる直近の期間(2014 年 4-5 月)では、4.2%となっており、急激な増加が進んでいる。</li><br>
+							日本の発電量に占める自然エネルギー等(水力除く)の割合は、2001 年度からの 10 年間では、0.7%から 1.1%へわずか 0.4%しか増えなかった。しかし固定価格買取制 度開始後、2013 年度には 2.5%と急増した。データが得られる直近の期間(2014 年 4-5 月)では、4.2%となっており、<mark>急激な増加が進んでいる</mark>。
+							</li><br>
 						<li>自然エネルギーの普及による便益の増加<br>
-								制度開始後に導入された自然エネルギーが火力発電の増加を抑制し、2013 年度に 削減された燃料費は、3,257 億円(石油換算)と試算される。同様に CO2 の削減効果 を試算すると、234 万世帯分の家庭の年間排出量(1,234 万トン)が削減されたこと になる。また、2013 年度の国内の太陽光発電投資による雇用創出効果は、28.1 万人 と試算される。</li>
+							制度開始後に導入された自然エネルギーが火力発電の増加を抑制し、<mark>2013 年度に削減された燃料費は、3,257 億円(石油換算)と試算される</mark>。同様に CO2 の削減効果 を試算すると、234 万世帯分の家庭の年間排出量(1,234 万トン)が削減されたこと になる。また、2013 年度の国内の太陽光発電投資による雇用創出効果は、28.1 万人 と試算される。 
+							
+						（<a href="source/jref.pdf" target="_blank">出典</a>）</li>
 					</ol>
-					<h5>課題</h5>
-					<p>2兆7000億円（国民が一年間で負担する額。1.35%の増税に当たる額）</p>
-					<ol>
-						<li>一般家庭の電気代向上</li>
-						<li>起業の電気代向上</li>
-   			 		<!-- <iframe width="100%" height="500px" src="https://www.youtube.com/embed/ffWECAESYtU?start=201" frameborder="0" allowfullscreen>
-   			 		</iframe> -->
+
+					
+
+					<h2 class="kube-docs-head">今後の課題</h2>
+
+					<h5>多額の国民負担</h5>
+
+					<p>
+						<cite>毎年約2兆7000億円。</cite><br>
+						<cite>このコストは今後20年続くので、総額は50兆円以上にのぼる。</cite>
+					</p>
+					出典：
+					<object class="pdf" data="source/fukakin_preview.pdf" type="application/pdf" width="100%">
+						  <p>It appears you don't have a PDF plugin for this browser.
+						  No biggie... you can <a href="source/fukakin_preview.pdf">click here to
+						  download the PDF file.</a></p>
+					</object>
+
+					<div class="spacer2"></div>
+					
+					<h5>家庭が負担</h5>
+					<ul>
+						<li>2006年と2013年を比べると、家庭の電気代は大きく上昇した。特に、4人世帯の電気代は2006年～2013年までの7年間の間に20,484円もプラス。何と、たった数年で家庭の電気代は<mark>年間2万円以上</mark>も上がった。
+							（<a href="https://enechange.jp/articles/electricity_charges_changeshift" target="_blank">出典１</a>）
+						</li>
+						<li>
+							東京電力や関西電力など電力10社は、2015年5月の電気料金を一斉に値上げする。3月30日に発表した。10社の一斉値上げは1年ぶり。原油などの輸入価格が下がったものの、太陽光発電など再生可能エネルギーの固定価格買い取り制度に基づいて電気料金に上乗せする費用が2倍以上増えるため、値上げする。（<a href="http://www.j-cast.com/2015/03/31231803.html" target="_blank">出典２</a>）
+						</li>
+					</ul>
+					<h5>企業が負担</h5>
+					<ul>
+						<li>負担額倍増。中小「利益飛ぶ」。（出典：読売新聞2014年4月27日）<br>
+							「負担増がなければ、従業員の給料や雇用を増やせるのだが……」<br>
+							埼玉県川口市の工業団地で金属部品の製造を手がける「石川金属機工」の石川義明社長（６３）は顔を曇らせた。従業員は約４０人。金属を溶かす「電炉」を動かすのに大量の電気を使う。工業団地の中小企業でまとめて電気を購入しているが、同社を含む主要５社の再生エネ負担金の合計は５月から約２４００万円と、現在の約１２００万円から倍増するという。５月の電気代は原油安で安くなるはずだったのに、再生エネ負担金の急増で帳消しになり、横ばいになる見込みだ。石川社長は「電気代で利益が吹き飛んでいる。このままでは中小企業は経営できない」と語る。</li>
+					</ul>
+
+					<h2 class="kube-docs-head">太陽光バブル？</h2>
+					<div class="spacer2"></div>
+
+   			 		<iframe width="100%" height="500px" src="https://www.youtube.com/embed/ffWECAESYtU?start=201" frameborder="0" allowfullscreen>
+   			 		</iframe>
+
+   			 		<h2 class="kube-docs-head" id="question">もう一度聞きます。あなたが内閣総理大臣ならこの法案を指示しますか？</h2>
+					<ul class="blocks-2">
+					    <li style="text-align: center"><a href=""><button class="btn btn-big btn-round">支持する</button></a></li>
+					    <li style="text-align: center"><a href=""><button class="btn btn-big btn-round">支持しない</button></a></li>
+					</ul>
+					<div class="spacer"></div>
+
+   			 	</div>
 			</div>
 		</div>
 	</div>
