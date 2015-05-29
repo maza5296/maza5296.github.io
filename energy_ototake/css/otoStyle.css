@@ -2,7 +2,6 @@ body{
 	color: rgb(50, 50, 50);
 }
 
-
 .otoNav {
 	position: fixed;
 }
@@ -65,7 +64,14 @@ table.table-flat tr:hover td{
 .mark-green {
 	background-color: lightgreen;
 }
+
 .finish{
-	top: 50%;
+	margin: 25% 0 0 0;
+	text-align: center;
+	position: relative;
+}
+
+.start {
+	margin: 10% 0 0 0;
 	text-align: center;
 }
